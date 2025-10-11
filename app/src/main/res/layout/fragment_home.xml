@@ -41,11 +41,28 @@
             android:contentDescription="@string/image_preview_desc"/>
 
     <Button
-            android:id="@+id/selectImagebtn"
+            android:id="@+id/openCameraBtn"
             app:layout_constraintTop_toBottomOf="@+id/iv_preview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="@string/openCameraBtn"/>
+    <TextView
+            android:id="@+id/orText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@+id/openCameraBtn"
+            android:text="OR"/>
+    <Button
+            android:id="@+id/selectImagebtn"
+            app:layout_constraintTop_toBottomOf="@+id/orText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:text="@string/selectImageButton"/>
@@ -55,7 +72,7 @@
             app:layout_constraintTop_toBottomOf="@+id/selectImagebtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:enabled="false"
