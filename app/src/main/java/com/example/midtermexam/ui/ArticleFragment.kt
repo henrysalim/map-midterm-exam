@@ -1,7 +1,7 @@
 package com.example.midtermexam.ui
 
 import android.os.Bundle
-import android.util.Log
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,20 +14,17 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midtermexam.R
-import com.example.midtermexam.api.NewsApiService
 import com.example.midtermexam.data.Article
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ArticleFragment : Fragment() {
 
     private lateinit var articleAdapter: ArticleAdapter
-    private val apiService: NewsApiService by lazy { NewsApiService.create() }
+    private val viewModel: ArticleViewModel by viewModels()
 
     // Deklarasi View
     private lateinit var progressBar: ProgressBar
@@ -41,27 +38,35 @@ class ArticleFragment : Fragment() {
     private lateinit var searchView: SearchView
     private lateinit var buttonFilter: ImageButton
 
-    // State Management untuk Data
-    private var apiQuery = "\"kesehatan mental\" OR \"stres\" OR \"kecemasan\""
-    private var currentPage = 1
-    private var isFetching = false
+    // State Management UI
     private var originalArticleList: List<Article> = emptyList()
-
-    // State Management untuk Filter (dipisahkan agar lebih jelas)
+    private var recyclerViewState: Parcelable? = null
     private var currentSearchQuery = ""
     private var isSortedAlphabetically = false
 
+    // Langkah 1: onCreateView HANYA untuk inflate layout
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_article, container, false)
+        return inflater.inflate(R.layout.fragment_article, container, false)
+    }
+
+    // Langkah 2: Semua interaksi dengan View dilakukan di onViewCreated
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Panggil semua fungsi setup di sini, SETELAH view dijamin sudah ada
         initViews(view)
         setupRecyclerView()
         setupClickListeners()
         setupScrollListener()
-        fetchArticles(currentPage)
-        return view
+        observeViewModel()
+
+        // Hanya ambil data dari API jika ViewModel belum punya data (saat pertama kali dibuka)
+        if (viewModel.articles.value.isNullOrEmpty()) {
+            viewModel.fetchArticles(viewModel.currentPage, API_KEY)
+        }
     }
 
     private fun initViews(view: View) {
@@ -81,58 +86,66 @@ class ArticleFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        articleAdapter = ArticleAdapter { /* Aksi klik item */ }
+        articleAdapter = ArticleAdapter { article ->
+            val bundle = Bundle().apply { putParcelable("article_data", article) }
+            findNavController().navigate(R.id.action_articleFragment_to_articleDetailFragment, bundle)
+        }
         recyclerView.adapter = articleAdapter
     }
 
     private fun setupClickListeners() {
-        buttonNextPage.setOnClickListener { currentPage++; fetchArticles(currentPage) }
-        buttonPrevPage.setOnClickListener { if (currentPage > 1) { currentPage--; fetchArticles(currentPage) } }
+        buttonNextPage.setOnClickListener { viewModel.fetchArticles(viewModel.currentPage + 1, API_KEY) }
+        buttonPrevPage.setOnClickListener {
+            if (viewModel.currentPage > 1) {
+                viewModel.fetchArticles(viewModel.currentPage - 1, API_KEY)
+            }
+        }
         fabScrollToTop.setOnClickListener { recyclerView.smoothScrollToPosition(0) }
 
-        // Listener SearchView: HANYA mengubah state query lalu panggil applyFilters
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                searchView.clearFocus()
-                return true
-            }
-
+            override fun onQueryTextSubmit(query: String?) = true.also { searchView.clearFocus() }
             override fun onQueryTextChange(newText: String?): Boolean {
                 currentSearchQuery = newText.orEmpty()
-                applyFilters() // Panggil fungsi pusat
+                applyFilters()
                 return true
             }
         })
 
-        // Listener Filter Abjad: HANYA mengubah state sort lalu panggil applyFilters
         buttonFilter.setOnClickListener {
             isSortedAlphabetically = !isSortedAlphabetically
             updateFilterIcon()
-            applyFilters() // Panggil fungsi pusat
+            applyFilters()
+            val message = if (isSortedAlphabetically) "Diurutkan berdasarkan abjad (A-Z)" else "Urutan dikembalikan ke semula"
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }
     }
 
-    /**
-     * FUNGSI PUSAT UNTUK SEMUA FILTER.
-     * Fungsi ini menerapkan filter pencarian dan urutan secara bersamaan.
-     */
-    private fun applyFilters() {
-        // 1. Mulai dengan daftar asli dari API
-        var processedList = originalArticleList
-
-        // 2. Terapkan filter PENCARIAN
-        if (currentSearchQuery.isNotEmpty()) {
-            processedList = processedList.filter { article ->
-                article.title?.contains(currentSearchQuery, ignoreCase = true) == true
+    private fun observeViewModel() {
+        viewModel.articles.observe(viewLifecycleOwner) { articles ->
+            originalArticleList = articles
+            applyFilters()
+            showContent()
+            if (recyclerViewState != null) {
+                recyclerView.layoutManager?.onRestoreInstanceState(recyclerViewState)
+                recyclerViewState = null
             }
         }
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            showLoading(isLoading)
+        }
+        viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
+            message?.let { showError(it) }
+        }
+    }
 
-        // 3. Terapkan filter URUTAN pada hasil dari langkah sebelumnya
+    private fun applyFilters() {
+        var processedList = originalArticleList
+        if (currentSearchQuery.isNotEmpty()) {
+            processedList = processedList.filter { it.title?.contains(currentSearchQuery, ignoreCase = true) == true }
+        }
         if (isSortedAlphabetically) {
             processedList = processedList.sortedBy { it.title }
         }
-
-        // 4. Tampilkan hasil akhir ke adapter
         articleAdapter.submitList(processedList)
     }
 
@@ -144,56 +157,14 @@ class ArticleFragment : Fragment() {
         })
     }
 
-    private fun fetchArticles(page: Int) {
-        if (isFetching) return
-        isFetching = true
-        showLoading(true)
-
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val response = apiService.searchArticles(query = apiQuery, page = page, apiKey = API_KEY)
-
-                withContext(Dispatchers.Main) {
-                    if (response.isSuccessful && response.body() != null) {
-                        val articles = response.body()!!.articles
-                        originalArticleList = articles.filter { isIndonesianOrEnglish(it.title) }
-
-                        // Setelah data baru datang, langsung terapkan filter yang sedang aktif
-                        applyFilters()
-                        recyclerView.scrollToPosition(0)
-                        showContent()
-                    } else {
-                        showError("Gagal mengambil data. Error: ${response.message()}")
-                    }
-                }
-            } catch (e: Exception) {
-                Log.e("ArticleFragment", "Exception: ${e.message}", e)
-                withContext(Dispatchers.Main) {
-                    showError("Gagal terhubung. Periksa koneksi internet Anda.")
-                }
-            } finally {
-                isFetching = false
-                withContext(Dispatchers.Main) {
-                    showLoading(false)
-                }
-            }
-        }
-    }
-
-    private fun isIndonesianOrEnglish(title: String?): Boolean {
-        if (title.isNullOrEmpty()) return false
-        val pattern = Regex("^[\\p{L}\\p{N}\\p{P}\\p{Z}]+\$")
-        return title.matches(pattern)
-    }
-
     private fun updateFilterIcon() {
-        val color = if (isSortedAlphabetically) {
-            ContextCompat.getColor(requireContext(), R.color.black) // Ganti warna ini jika perlu
-            Toast.makeText(context, "Diurutkan berdasarkan abjad (A-Z)", Toast.LENGTH_SHORT).show()
-        } else {
-            ContextCompat.getColor(requireContext(), android.R.color.darker_gray)
-            Toast.makeText(context, "Urutan dikembalikan ke semula", Toast.LENGTH_SHORT).show()
-        }
+        val colorRes = if (isSortedAlphabetically) R.color.black else android.R.color.darker_gray
+        buttonFilter.setColorFilter(ContextCompat.getColor(requireContext(), colorRes))
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -206,8 +177,8 @@ class ArticleFragment : Fragment() {
         textViewError.visibility = View.GONE
         recyclerView.visibility = View.VISIBLE
         layoutPagination.visibility = View.VISIBLE
-        textViewPageNumber.text = "Halaman: $currentPage"
-        buttonPrevPage.visibility = if (currentPage > 1) View.VISIBLE else View.INVISIBLE
+        textViewPageNumber.text = "Halaman: ${viewModel.currentPage}"
+        buttonPrevPage.visibility = if (viewModel.currentPage > 1) View.VISIBLE else View.INVISIBLE
     }
 
     private fun showError(message: String) {
