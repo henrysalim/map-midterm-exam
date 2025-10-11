@@ -8,6 +8,7 @@
     <string name="uploadImageButtom">Upload an Image</string>
     <string name="selectImageButton">Select an Image</string>
     <string name="image_preview_desc">Image Preview</string>
+    <string name="openCameraBtn">Open Camera</string>
     <string name="menuHomeTitle">Home</string>
     <string name="menuProfileTitle">Profile</string>
     <string name="menuArticleTitle">Article</string>
