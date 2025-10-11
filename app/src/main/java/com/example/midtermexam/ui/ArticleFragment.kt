@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midtermexam.R
@@ -31,14 +34,22 @@ class ArticleFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var textViewError: TextView
     private lateinit var buttonNextPage: Button
-    private lateinit var buttonPrevPage: Button // Tombol baru
+    private lateinit var buttonPrevPage: Button
     private lateinit var textViewPageNumber: TextView
     private lateinit var layoutPagination: LinearLayout
     private lateinit var fabScrollToTop: FloatingActionButton
+    private lateinit var searchView: SearchView
+    private lateinit var buttonFilter: ImageButton
 
-    // State Management
+    // State Management untuk Data
+    private var apiQuery = "\"kesehatan mental\" OR \"stres\" OR \"kecemasan\""
     private var currentPage = 1
     private var isFetching = false
+    private var originalArticleList: List<Article> = emptyList()
+
+    // State Management untuk Filter (dipisahkan agar lebih jelas)
+    private var currentSearchQuery = ""
+    private var isSortedAlphabetically = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +60,7 @@ class ArticleFragment : Fragment() {
         setupRecyclerView()
         setupClickListeners()
         setupScrollListener()
-        fetchArticles(currentPage) // Ambil data untuk halaman pertama
+        fetchArticles(currentPage)
         return view
     }
 
@@ -58,31 +69,71 @@ class ArticleFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerViewArticles)
         textViewError = view.findViewById(R.id.textViewError)
         buttonNextPage = view.findViewById(R.id.buttonNextPage)
-        buttonPrevPage = view.findViewById(R.id.buttonPrevPage) // Inisialisasi tombol baru
+        buttonPrevPage = view.findViewById(R.id.buttonPrevPage)
         textViewPageNumber = view.findViewById(R.id.textViewPageNumber)
         layoutPagination = view.findViewById(R.id.layout_pagination)
         fabScrollToTop = view.findViewById(R.id.fabScrollToTop)
+        searchView = view.findViewById(R.id.searchView)
+        buttonFilter = view.findViewById(R.id.buttonFilter)
+
+        searchView.isIconified = false
+        searchView.onActionViewExpanded()
     }
 
     private fun setupRecyclerView() {
-        articleAdapter = ArticleAdapter { article -> /* Aksi klik item */ }
+        articleAdapter = ArticleAdapter { /* Aksi klik item */ }
         recyclerView.adapter = articleAdapter
     }
 
     private fun setupClickListeners() {
-        buttonNextPage.setOnClickListener {
-            currentPage++
-            fetchArticles(currentPage)
+        buttonNextPage.setOnClickListener { currentPage++; fetchArticles(currentPage) }
+        buttonPrevPage.setOnClickListener { if (currentPage > 1) { currentPage--; fetchArticles(currentPage) } }
+        fabScrollToTop.setOnClickListener { recyclerView.smoothScrollToPosition(0) }
+
+        // Listener SearchView: HANYA mengubah state query lalu panggil applyFilters
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                currentSearchQuery = newText.orEmpty()
+                applyFilters() // Panggil fungsi pusat
+                return true
+            }
+        })
+
+        // Listener Filter Abjad: HANYA mengubah state sort lalu panggil applyFilters
+        buttonFilter.setOnClickListener {
+            isSortedAlphabetically = !isSortedAlphabetically
+            updateFilterIcon()
+            applyFilters() // Panggil fungsi pusat
         }
-        buttonPrevPage.setOnClickListener {
-            if (currentPage > 1) {
-                currentPage--
-                fetchArticles(currentPage)
+    }
+
+    /**
+     * FUNGSI PUSAT UNTUK SEMUA FILTER.
+     * Fungsi ini menerapkan filter pencarian dan urutan secara bersamaan.
+     */
+    private fun applyFilters() {
+        // 1. Mulai dengan daftar asli dari API
+        var processedList = originalArticleList
+
+        // 2. Terapkan filter PENCARIAN
+        if (currentSearchQuery.isNotEmpty()) {
+            processedList = processedList.filter { article ->
+                article.title?.contains(currentSearchQuery, ignoreCase = true) == true
             }
         }
-        fabScrollToTop.setOnClickListener {
-            recyclerView.smoothScrollToPosition(0)
+
+        // 3. Terapkan filter URUTAN pada hasil dari langkah sebelumnya
+        if (isSortedAlphabetically) {
+            processedList = processedList.sortedBy { it.title }
         }
+
+        // 4. Tampilkan hasil akhir ke adapter
+        articleAdapter.submitList(processedList)
     }
 
     private fun setupScrollListener() {
@@ -100,32 +151,24 @@ class ArticleFragment : Fragment() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val searchQuery = "\"kesehatan mental\" OR \"stres\" OR \"kecemasan\""
-                val response = apiService.searchArticles(query = searchQuery, page = page, apiKey = API_KEY)
+                val response = apiService.searchArticles(query = apiQuery, page = page, apiKey = API_KEY)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful && response.body() != null) {
                         val articles = response.body()!!.articles
+                        originalArticleList = articles.filter { isIndonesianOrEnglish(it.title) }
 
-                        // ---- FILTER BAHASA DITERAPKAN DI SINI ----
-                        val filteredArticles = articles.filter { isIndonesianOrEnglish(it.title) }
-
-                        if (filteredArticles.isNotEmpty()) {
-                            articleAdapter.submitList(filteredArticles)
-                            recyclerView.scrollToPosition(0)
-                            showContent()
-                        } else {
-                            // Jika setelah difilter jadi kosong, coba cari halaman berikutnya
-                            Toast.makeText(context, "Tidak ada artikel relevan di halaman ini, mencoba halaman berikutnya...", Toast.LENGTH_SHORT).show()
-                            if (currentPage > 0) buttonNextPage.performClick()
-                        }
+                        // Setelah data baru datang, langsung terapkan filter yang sedang aktif
+                        applyFilters()
+                        recyclerView.scrollToPosition(0)
+                        showContent()
                     } else {
                         showError("Gagal mengambil data. Error: ${response.message()}")
                     }
                 }
             } catch (e: Exception) {
+                Log.e("ArticleFragment", "Exception: ${e.message}", e)
                 withContext(Dispatchers.Main) {
-                    Log.e("ArticleFragment", "Exception: ${e.message}", e)
                     showError("Gagal terhubung. Periksa koneksi internet Anda.")
                 }
             } finally {
@@ -137,15 +180,20 @@ class ArticleFragment : Fragment() {
         }
     }
 
-    /**
-     * Fungsi filter untuk memeriksa apakah judul hanya berisi karakter Latin standar.
-     * Ini akan menyaring judul dengan aksara non-Latin (Cyrillic, Arab, dll).
-     */
     private fun isIndonesianOrEnglish(title: String?): Boolean {
         if (title.isNullOrEmpty()) return false
-        // Regex ini memeriksa apakah string hanya berisi huruf (a-z, A-Z), angka, spasi, dan tanda baca umum.
         val pattern = Regex("^[\\p{L}\\p{N}\\p{P}\\p{Z}]+\$")
         return title.matches(pattern)
+    }
+
+    private fun updateFilterIcon() {
+        val color = if (isSortedAlphabetically) {
+            ContextCompat.getColor(requireContext(), R.color.black) // Ganti warna ini jika perlu
+            Toast.makeText(context, "Diurutkan berdasarkan abjad (A-Z)", Toast.LENGTH_SHORT).show()
+        } else {
+            ContextCompat.getColor(requireContext(), android.R.color.darker_gray)
+            Toast.makeText(context, "Urutan dikembalikan ke semula", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -159,7 +207,6 @@ class ArticleFragment : Fragment() {
         recyclerView.visibility = View.VISIBLE
         layoutPagination.visibility = View.VISIBLE
         textViewPageNumber.text = "Halaman: $currentPage"
-        // Atur visibilitas tombol "Sebelumnya"
         buttonPrevPage.visibility = if (currentPage > 1) View.VISIBLE else View.INVISIBLE
     }
 
@@ -175,4 +222,6 @@ class ArticleFragment : Fragment() {
     companion object {
         private const val API_KEY = "0391aa4a8d865486adc2220023fcde74"
     }
+
 }
+
