@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">MidTermExam</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="homepageTitle">Welcome to DeDe (Depression Detector)!</string>
+    <string name="homepageDescription">In this app, you can classify whether a facial expression is depressed or not.
+        Simply upload your image that contains a facial expression, then the app will automatically process it with
+        modern Machine Learning (ML).
+    </string>
+    <string name="uploadImageButtom">Upload an Image</string>
+    <string name="selectImageButton">Select an Image</string>
+    <string name="image_preview_desc">Image Preview</string>
     <string name="menuHomeTitle">Home</string>
     <string name="menuArticleTitle">Article</string>
 </resources>
