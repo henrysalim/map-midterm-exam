@@ -10,8 +10,53 @@
             android:label="Home"
             tools:layout="@layout/fragment_home"/>
     <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.midtermexam.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile"/>
+    <fragment
             android:id="@+id/articleFragment"
             android:name="com.example.midtermexam.ui.ArticleFragment"
             android:label="Article"
             tools:layout="@layout/fragment_article"/>
+
+
+
+    <action
+        android:id="@+id/action_ProfileFragment_to_EditProfileFragment"
+        app:destination="@id/EditProfileFragment" />
+    <action
+        android:id="@+id/action_ProfileFragment_to_ChangePasswordFragment"
+        app:destination="@id/ChangePasswordFragment" />
+    <action
+        android:id="@+id/action_ProfileFragment_to_AboutFragment"
+        app:destination="@id/AboutFragment" />
+    <action
+        android:id="@+id/action_ProfileFragment_to_TncFragment"
+        app:destination="@id/TncFragment" />
+
+    <fragment
+        android:id="@+id/EditProfileFragment"
+        android:name="com.example.midtermexam.EditProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile" />
+
+    <fragment
+        android:id="@+id/ChangePasswordFragment"
+        android:name="com.example.midtermexam.ChangePasswordFragment"
+        android:label="Change Password"
+        tools:layout="@layout/fragment_change_password" />
+
+    <fragment
+        android:id="@+id/AboutFragment"
+        android:name="com.example.midtermexam.AboutFragment"
+        android:label="About App"
+        tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/TncFragment"
+        android:name="com.example.midtermexam.TncFragment"
+        android:label="Terms and Conditions"
+        tools:layout="@layout/fragment_tnc" />
+
 </navigation>
