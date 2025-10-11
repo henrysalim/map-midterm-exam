@@ -7,31 +7,66 @@
         android:layout_height="match_parent"
         tools:context=".ui.ArticleFragment">
 
+    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+            <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:iconifiedByDefault="false"
+                    app:queryHint="Cari artikel..." />
+
+            <ImageButton
+                    android:id="@+id/buttonFilter"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_filter"
+                    android:contentDescription="Filter Artikel" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewArticles"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/list_item_article"
+
+            app:layout_constraintTop_toBottomOf="@id/cardSearch"
             app:layout_constraintBottom_toTopOf="@+id/layout_pagination"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="gone"
-            tools:visibility="visible"
-            tools:listitem="@layout/list_item_article" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     <LinearLayout
             android:id="@+id/layout_pagination"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:orientation="horizontal"
             android:padding="8dp"
             android:visibility="gone"
             tools:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
         <Button
                 android:id="@+id/buttonPrevPage"
@@ -46,7 +81,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:textAppearance="?attr/textAppearanceBody2"
                 tools:text="Halaman: 1" />
 
         <Button
@@ -54,40 +88,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Berikutnya" />
-
     </LinearLayout>
 
     <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/layout_pagination"
             app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="gone" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardSearch" />
 
     <TextView
             android:id="@+id/textViewError"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:visibility="gone"
-            tools:text="Gagal memuat data" />
+            tools:text="Gagal memuat data"
+            app:layout_constraintBottom_toTopOf="@id/layout_pagination"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardSearch" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabScrollToTop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:contentDescription="Kembali ke atas"
             android:src="@drawable/ic_arrow_upward"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:visibility="gone"
-            tools:visibility="visible"
-            android:contentDescription="Kembali ke atas" />
+            app:layout_constraintBottom_toTopOf="@id/layout_pagination"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
