@@ -12,8 +12,5 @@
     <string name="menuHomeTitle">Home</string>
     <string name="menuProfileTitle">Profile</string>
     <string name="menuArticleTitle">Article</string>
-    <string name="menuHistoryTitle">History</string>
-    <string name="hello_blank_fragment">Hello Blank Fragment</string>
-    <string name="accuracy_format">Akurasi: %.1f%%</string>
-    <string name="pin_history_item">Pin or unpin history item</string>
+    <string name="hello_blank_fragment">Hello</string>
 </resources>
