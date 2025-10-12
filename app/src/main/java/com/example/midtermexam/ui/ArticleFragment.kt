@@ -26,7 +26,6 @@ class ArticleFragment : Fragment() {
     private lateinit var articleAdapter: ArticleAdapter
     private val viewModel: ArticleViewModel by viewModels()
 
-    // Deklarasi View
     private lateinit var progressBar: ProgressBar
     private lateinit var recyclerView: RecyclerView
     private lateinit var textViewError: TextView
@@ -37,14 +36,11 @@ class ArticleFragment : Fragment() {
     private lateinit var fabScrollToTop: FloatingActionButton
     private lateinit var searchView: SearchView
     private lateinit var buttonFilter: ImageButton
-
-    // State Management UI
     private var originalArticleList: List<Article> = emptyList()
     private var recyclerViewState: Parcelable? = null
     private var currentSearchQuery = ""
     private var isSortedAlphabetically = false
 
-    // Langkah 1: onCreateView HANYA untuk inflate layout
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,18 +48,15 @@ class ArticleFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_article, container, false)
     }
 
-    // Langkah 2: Semua interaksi dengan View dilakukan di onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Panggil semua fungsi setup di sini, SETELAH view dijamin sudah ada
         initViews(view)
         setupRecyclerView()
         setupClickListeners()
         setupScrollListener()
         observeViewModel()
 
-        // Hanya ambil data dari API jika ViewModel belum punya data (saat pertama kali dibuka)
         if (viewModel.articles.value.isNullOrEmpty()) {
             viewModel.fetchArticles(viewModel.currentPage, API_KEY)
         }

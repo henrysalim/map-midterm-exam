@@ -3,7 +3,6 @@ package com.example.midtermexam.data
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-// Tambahkan @Parcelize dan implement Parcelable
 @Parcelize
 data class Article(
     val title: String?,
@@ -20,3 +19,9 @@ data class Source(
     val name: String?,
     val url: String?
 ) : Parcelable
+
+data class Comment(
+    val author: String,
+    val text: String,
+    val replies: MutableList<Comment> = mutableListOf() // Daftar untuk menampung balasan
+)
