@@ -8,6 +8,10 @@ android {
     namespace = "com.example.midtermexam"
     compileSdk = 36
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.example.midtermexam"
         minSdk = 24
