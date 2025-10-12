@@ -1,38 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/nav_graph"
-            app:startDestination="@id/homeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
 
     <fragment
-            android:id="@+id/homeFragment"
-            android:name="com.example.midtermexam.ui.HomeFragment"
-            android:label="Home"
-            tools:layout="@layout/fragment_home" />
+        android:id="@+id/homeFragment"
+        android:name="com.example.midtermexam.ui.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.midtermexam.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_ProfileFragment_to_EditProfileFragment"
+            app:destination="@id/EditProfileFragment" />
+        <action
+            android:id="@+id/action_ProfileFragment_to_ChangePasswordFragment"
+            app:destination="@id/ChangePasswordFragment" />
+        <action
+            android:id="@+id/action_ProfileFragment_to_AboutFragment"
+            app:destination="@id/AboutFragment" />
+        <action
+            android:id="@+id/action_ProfileFragment_to_TncFragment"
+            app:destination="@id/TncFragment" />
+    </fragment>
+
     <fragment
-            android:id="@+id/articleFragment"
-            android:name="com.example.midtermexam.ui.ArticleFragment"
-            android:label="Article"
-            tools:layout="@layout/fragment_article"/>
-    <action
-        android:id="@+id/action_ProfileFragment_to_EditProfileFragment"
-        app:destination="@id/EditProfileFragment" />
-    <action
-        android:id="@+id/action_ProfileFragment_to_ChangePasswordFragment"
-        app:destination="@id/ChangePasswordFragment" />
-    <action
-        android:id="@+id/action_ProfileFragment_to_AboutFragment"
-        app:destination="@id/AboutFragment" />
-    <action
-        android:id="@+id/action_ProfileFragment_to_TncFragment"
-        app:destination="@id/TncFragment" />
+        android:id="@+id/articleFragment"
+        android:name="com.example.midtermexam.ui.ArticleFragment"
+        android:label="Article"
+        tools:layout="@layout/fragment_article">
+        <action
+            android:id="@+id/action_articleFragment_to_articleDetailFragment"
+            app:destination="@id/articleDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/articleDetailFragment"
+        android:name="com.example.midtermexam.ui.ArticleDetailFragment"
+        android:label="Detail Artikel"
+        tools:layout="@layout/fragment_article_detail">
+        <argument
+            android:name="article"
+            app:argType="com.example.midtermexam.data.Article" />
+    </fragment>
 
     <fragment
         android:id="@+id/EditProfileFragment"
@@ -57,5 +73,10 @@
         android:name="com.example.midtermexam.TncFragment"
         android:label="Terms and Conditions"
         tools:layout="@layout/fragment_tnc" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.midtermexam.HistoryFragment"
+        android:label="History"
+        tools:layout="@layout/fragment_history" />
 
 </navigation>
