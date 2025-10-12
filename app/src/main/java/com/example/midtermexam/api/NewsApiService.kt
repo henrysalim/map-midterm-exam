@@ -15,13 +15,13 @@ interface NewsApiService {
         @Query("q") query: String,
         @Query("lang") lang: String = "id",
         @Query("country") country: String = "id",
-        @Query("page") page: Int, // <-- TAMBAHKAN INI
+        @Query("page") page: Int,
         @Query("apikey") apiKey: String
     ): Response<NewsApiResponse>
 
 
     companion object {
-        private const val BASE_URL = "https://gnews.io/" // <-- BASE URL BARU
+        private const val BASE_URL = "https://gnews.io/"
 
         fun create(): NewsApiService {
             val retrofit = Retrofit.Builder()

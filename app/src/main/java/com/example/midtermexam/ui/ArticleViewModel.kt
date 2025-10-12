@@ -8,37 +8,31 @@ import com.example.midtermexam.api.NewsApiService
 import com.example.midtermexam.data.Article
 import kotlinx.coroutines.launch
 
-// ViewModel akan bertanggung jawab atas semua logika data dan API
 class ArticleViewModel : ViewModel() {
 
     private val apiService = NewsApiService.create()
 
-    // LiveData untuk daftar artikel. Fragment akan "mengamati" ini.
     private val _articles = MutableLiveData<List<Article>>()
     val articles: LiveData<List<Article>> = _articles
 
-    // LiveData untuk status loading
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    // LiveData untuk pesan error
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> = _errorMessage
 
     var currentPage = 1
     var apiQuery = "\"kesehatan mental\" OR \"stres\" OR \"kecemasan\""
 
-    // Fungsi untuk mengambil data dari API, sekarang ada di dalam ViewModel
     fun fetchArticles(page: Int, apiKey: String) {
         _isLoading.value = true
-        // viewModelScope akan otomatis mengelola Coroutine sesuai siklus hidup ViewModel
         viewModelScope.launch {
             try {
                 val response = apiService.searchArticles(query = apiQuery, page = page, apiKey = apiKey)
                 if (response.isSuccessful && response.body() != null) {
                     val filteredArticles = response.body()!!.articles.filter { isIndonesianOrEnglish(it.title) }
                     _articles.postValue(filteredArticles)
-                    currentPage = page // Simpan halaman saat ini
+                    currentPage = page
                 } else {
                     _errorMessage.postValue("Gagal mengambil data: ${response.message()}")
                 }
