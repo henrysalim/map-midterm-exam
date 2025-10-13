@@ -63,4 +63,19 @@
         android:label="Terms and Conditions"
         tools:layout="@layout/fragment_tnc" />
 
+
+
+
+
+        <action
+            android:id="@+id/action_articleFragment_to_articleDetailFragment"
+            app:destination="@id/articleDetailFragment" />
+
+    <fragment
+        android:id="@+id/articleDetailFragment"
+        android:name="com.example.midtermexam.ui.ArticleDetailFragment"
+        android:label="Article Detail"
+        tools:layout="@layout/fragment_article_detail" />
+
+
 </navigation>
