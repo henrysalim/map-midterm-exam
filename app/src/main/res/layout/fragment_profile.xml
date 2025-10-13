@@ -18,7 +18,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:background="#96D7C6">
+                android:background="#6D94C5">
 
                 <ImageView
                     android:id="@+id/arc"
@@ -46,32 +46,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:text="Profile"
-                    android:textColor="#000000"
+                    android:textColor="#F5EFE6"
                     android:textSize="30sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:background="@drawable/background_oval_back"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/backIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/back" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -95,8 +74,8 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_profile_button"
-                android:elevation="6dp"
                 android:clickable="true"
+                android:elevation="6dp"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">
 
@@ -140,8 +119,8 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_profile_button"
-                android:elevation="6dp"
                 android:clickable="true"
+                android:elevation="6dp"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">
 
@@ -185,8 +164,8 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_profile_button"
-                android:elevation="6dp"
                 android:clickable="true"
+                android:elevation="6dp"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">
 
@@ -230,8 +209,8 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_profile_button"
-                android:elevation="6dp"
                 android:clickable="true"
+                android:elevation="6dp"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">
 
@@ -275,8 +254,8 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_profile_button"
-                android:elevation="6dp"
                 android:clickable="true"
+                android:elevation="6dp"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">
 
