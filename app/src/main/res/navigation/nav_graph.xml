@@ -5,15 +5,17 @@
             android:id="@+id/nav_graph"
             app:startDestination="@id/homeFragment">
 
+    <!--  Fragment to display HomeFragment  -->
     <fragment
             android:id="@+id/homeFragment"
             android:name="com.example.midtermexam.ui.HomeFragment"
             android:label="Home"
             tools:layout="@layout/fragment_home" />
 
+    <!--  Fragment to display ProfileFragment with a couple actions to another page  -->
     <fragment
             android:id="@+id/profileFragment"
-            android:name="com.example.midtermexam.ProfileFragment"
+            android:name="com.example.midtermexam.ui.ProfileFragment"
             android:label="Profile"
             tools:layout="@layout/fragment_profile">
         <action
@@ -30,6 +32,7 @@
                 app:destination="@id/TncFragment" />
     </fragment>
 
+    <!--  Fragment to display ArticleFragment  -->
     <fragment
             android:id="@+id/articleFragment"
             android:name="com.example.midtermexam.ui.ArticleFragment"
@@ -40,6 +43,7 @@
                 app:destination="@id/articleDetailFragment" />
     </fragment>
 
+    <!--  Fragment to display the detail of the article from ArticleFragment  -->
     <fragment
             android:id="@+id/articleDetailFragment"
             android:name="com.example.midtermexam.ui.ArticleDetailFragment"
@@ -50,27 +54,31 @@
                 app:argType="com.example.midtermexam.data.Article" />
     </fragment>
 
+    <!--  Fragment to display EditProfileFragment  -->
     <fragment
             android:id="@+id/EditProfileFragment"
-            android:name="com.example.midtermexam.EditProfileFragment"
+            android:name="com.example.midtermexam.ui.EditProfileFragment"
             android:label="Edit Profile"
             tools:layout="@layout/fragment_edit_profile" />
 
+    <!--  Fragment to display ChangePasswordFragment  -->
     <fragment
             android:id="@+id/ChangePasswordFragment"
-            android:name="com.example.midtermexam.ChangePasswordFragment"
+            android:name="com.example.midtermexam.ui.ChangePasswordFragment"
             android:label="Change Password"
             tools:layout="@layout/fragment_change_password" />
 
+    <!--  Fragment to display AboutFragment  -->
     <fragment
             android:id="@+id/AboutFragment"
-            android:name="com.example.midtermexam.AboutFragment"
+            android:name="com.example.midtermexam.ui.AboutFragment"
             android:label="About App"
             tools:layout="@layout/fragment_about" />
 
+    <!--  Fragment to display TncFragment  -->
     <fragment
             android:id="@+id/TncFragment"
-            android:name="com.example.midtermexam.TncFragment"
+            android:name="com.example.midtermexam.ui.TncFragment"
             android:label="Terms and Conditions"
             tools:layout="@layout/fragment_tnc" />
 
