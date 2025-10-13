@@ -9,6 +9,7 @@
         android:layout_marginHorizontal="25sp"
         tools:context=".ui.HomeFragment">
 
+    <!--  Text view to display homepage title  -->
     <TextView
             android:id="@+id/homepageTitle"
             app:layout_constraintTop_toTopOf="parent"
@@ -18,6 +19,8 @@
             android:textSize="19sp"
             android:textStyle="bold"
             android:text="@string/homepageTitle"/>
+
+    <!--  Text view to display app description in homepage  -->
     <TextView
             android:id="@+id/homepageDescription"
             app:layout_constraintTop_toBottomOf="@+id/homepageTitle"
@@ -27,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="@string/homepageDescription"/>
 
-
+    <!--  Image view to display preview from the uploaded image  -->
     <ImageView
             android:id="@+id/iv_preview"
             android:layout_width="300dp"
@@ -40,6 +43,7 @@
             android:background="#E0E0E0"
             android:contentDescription="@string/image_preview_desc"/>
 
+    <!--  Button to open camera to take photo  -->
     <Button
             android:id="@+id/openCameraBtn"
             app:layout_constraintTop_toBottomOf="@+id/iv_preview"
@@ -50,6 +54,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:text="@string/openCameraBtn"/>
+
+    <!--  Text view to display 'OR' text to tell the alternatives  -->
     <TextView
             android:id="@+id/orText"
             android:layout_width="match_parent"
@@ -57,6 +63,8 @@
             android:textAlignment="center"
             app:layout_constraintTop_toBottomOf="@+id/openCameraBtn"
             android:text="OR"/>
+
+    <!--  Button to select an image from storage  -->
     <Button
             android:id="@+id/selectImagebtn"
             app:layout_constraintTop_toBottomOf="@+id/orText"
@@ -67,6 +75,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:text="@string/selectImageButton"/>
 
+    <!--  Button to upload the photo and classify whether facial expression is depressed/not  -->
     <Button
             android:id="@+id/uploadImageBtn"
             app:layout_constraintTop_toBottomOf="@+id/selectImagebtn"

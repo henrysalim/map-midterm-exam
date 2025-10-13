@@ -24,8 +24,6 @@ import java.io.File
 import java.io.FileOutputStream
 import java.lang.Exception
 
-const val PICK_IMAGE_FILE = 1
-
 class HomeFragment : Fragment() {
     private lateinit var ivPreview: ImageView
     private lateinit var btnSelectImage: Button
@@ -35,6 +33,11 @@ class HomeFragment : Fragment() {
 
     private var selectedImageUri: Uri? = null
 
+    /*
+        Initialize image preview and buttons (select image button, upload image button,
+        open camera button) when the view created. Then, set an on click listener (if user
+        click the button).
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -56,6 +59,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // Check permission to select image from storage
     private fun checkPermissionAndPickImage() {
         val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             Manifest.permission.READ_MEDIA_IMAGES
@@ -67,9 +71,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun uploadImage() {
+        // is selectedImageUri null/not?
         selectedImageUri?.let { uri ->
             lifecycleScope.launch {
                 try {
+                    // convert image uri to Multipartbody.Part format
                     val part = uriToMultipartBodyPart(uri)
 
                     if (part == null) {
@@ -79,14 +85,16 @@ class HomeFragment : Fragment() {
                         return@launch
                     }
 
-//                    Show a loading indicator
+                    // Show a loading indicator
                     Toast.makeText(requireContext(), "Uploading...", Toast.LENGTH_SHORT).show()
                 } catch (e: Exception) {
+                    // if there's any error, display the error message using Toast
                     Toast.makeText(requireContext(), "Upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
                 } finally {
 
                 }
             }
+            // if selectedImageUri still null, display Toast message
         } ?: Toast.makeText(requireContext(), "Please select an image", Toast.LENGTH_SHORT).show()
     }
 
@@ -96,26 +104,29 @@ class HomeFragment : Fragment() {
             val contentResolver = requireContext().contentResolver
             val inputStream = contentResolver.openInputStream(uri) ?: return null
 
-//            create a temporary file
+            // create a temporary file
             val file = File(requireContext().cacheDir, "temp_image_file.jpg")
             val outputStream = FileOutputStream(file)
             inputStream.copyTo(outputStream)
             inputStream.close()
             outputStream.close()
 
-//            get the MIME type of the file
+            // get the MIME type of the file
             val mimeType = contentResolver.getType(uri) ?: "image/jpeg"
             val requestFile = file.asRequestBody(mimeType.toMediaTypeOrNull())
 
-//            create MultipartBody.Part
+            // create MultipartBody.Part
             MultipartBody.Part.createFormData("image", file.name, requestFile)
         } catch (e: Exception) {
+            // print error stack trace to the log if any
             e.printStackTrace()
             null
         }
     }
 
-    //    handle permission request
+    /* handle permission request */
+
+    // handle storage permission
     private val requestStoragePermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
@@ -125,8 +136,9 @@ class HomeFragment : Fragment() {
             }
         }
 
+    // handle open camera permission
     private val requestCameraPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted: Boolean ->
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
                 launchCamera()
             } else {
@@ -134,21 +146,23 @@ class HomeFragment : Fragment() {
             }
         }
 
+    // handle pick image from gallery
     private val pickImageFromGalleryLauncher =
-        registerForActivityResult(ActivityResultContracts.GetContent()){ uri: Uri? ->
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
                 ivPreview.load(it)
             }
         }
 
+    // handle take photo in camera
     private val takePictureLauncher =
-        registerForActivityResult(ActivityResultContracts.TakePicture()) {success: Boolean ->
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { success: Boolean ->
             if (success) {
                 cameraImageUri?.let { ivPreview.load(it) }
             }
         }
 
-    //    handle activity results for picking an image
+    // handle activity results for picking an image
     private val imagePickerLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
@@ -158,15 +172,18 @@ class HomeFragment : Fragment() {
             }
         }
 
+    // launch the camera
     private fun launchCamera() {
         cameraImageUri = createImageUri()
         takePictureLauncher.launch(cameraImageUri)
     }
 
+    // launch the gallery (image) picker
     private fun launchGalleryPicker() {
         pickImageFromGalleryLauncher.launch("image/*")
     }
 
+    // create image URI with FileProvider
     private fun createImageUri(): Uri? {
         val imageFile = File(requireContext().cacheDir, "camera_photo_${System.currentTimeMillis()}.jpg")
 
