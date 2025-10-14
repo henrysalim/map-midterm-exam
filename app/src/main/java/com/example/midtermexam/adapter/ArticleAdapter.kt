@@ -1,4 +1,4 @@
-package com.example.midtermexam.ui
+package com.example.midtermexam.adapter
 
 import android.util.Log
 import android.view.LayoutInflater

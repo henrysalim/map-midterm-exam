@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.midtermexam.data.ScanResult
 import com.example.midtermexam.databinding.FragmentHistoryBinding
-import com.example.midtermexam.ui.HistoryAdapter
+import com.example.midtermexam.adapter.HistoryAdapter
 
 class HistoryFragment : Fragment() {
 

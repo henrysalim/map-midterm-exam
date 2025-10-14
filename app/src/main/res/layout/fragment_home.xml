@@ -53,6 +53,7 @@
             android:layout_marginBottom="4dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:backgroundTint="@color/darkblue"
             android:text="@string/openCameraBtn"/>
 
     <!--  Text view to display 'OR' text to tell the alternatives  -->
@@ -73,6 +74,7 @@
             android:layout_marginTop="4dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:backgroundTint="@color/darkblue"
             android:text="@string/selectImageButton"/>
 
     <!--  Button to upload the photo and classify whether facial expression is depressed/not  -->

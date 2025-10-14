@@ -18,7 +18,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.midtermexam.R
+import com.example.midtermexam.adapter.ArticleAdapter
 import com.example.midtermexam.data.Article
+import com.example.midtermexam.model.ArticleViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ArticleFragment : Fragment() {

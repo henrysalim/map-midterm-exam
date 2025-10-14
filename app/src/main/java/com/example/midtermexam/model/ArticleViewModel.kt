@@ -1,4 +1,4 @@
-package com.example.midtermexam.ui
+package com.example.midtermexam.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class ArticleViewModel : ViewModel() {
 
-    private val apiService = NewsApiService.create()
+    private val apiService = NewsApiService.Companion.create()
 
     private val _articles = MutableLiveData<List<Article>>()
     val articles: LiveData<List<Article>> = _articles
