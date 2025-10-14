@@ -12,6 +12,13 @@
             android:label="Home"
             tools:layout="@layout/fragment_home" />
 
+    <!--  Fragment to display HistoryFragment  -->
+    <fragment
+            android:id="@+id/historyFragment"
+            android:name="com.example.midtermexam.ui.HistoryFragment"
+            android:label="History"
+            tools:layout="@layout/fragment_history" />
+
     <!--  Fragment to display ProfileFragment with a couple actions to another page  -->
     <fragment
             android:id="@+id/profileFragment"
