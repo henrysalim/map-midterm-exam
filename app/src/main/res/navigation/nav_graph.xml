@@ -76,6 +76,10 @@
             tools:layout="@layout/fragment_about" />
 
     <!--  Fragment to display TncFragment  -->
+    <action
+        android:id="@+id/action_AboutFragment_to_ProfileFragment"
+        app:destination="@id/profileFragment"/>
+
     <fragment
             android:id="@+id/TncFragment"
             android:name="com.example.midtermexam.ui.TncFragment"
