@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="wrap_content"
-                                                   android:layout_margin="8dp"
-                                                   app:cardCornerRadius="12dp"
-                                                   app:cardElevation="4dp">
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:background="@color/white"
             android:layout_height="wrap_content">
 
         <!-- Gambar artikel -->
@@ -21,7 +23,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/backgrounds/scenic" />
+                tools:src="@tools:sample/backgrounds/scenic"/>
 
         <!-- Judul Artikel -->
         <TextView
@@ -37,7 +39,7 @@
                 tools:text="10 Cara Efektif Mengurangi Stres di Tempat Kerja"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageViewArticle" />
+                app:layout_constraintTop_toBottomOf="@id/imageViewArticle"/>
 
         <!-- Sumber Artikel -->
         <TextView
@@ -49,7 +51,7 @@
                 android:textColor="?android:attr/textColorSecondary"
                 tools:text="Nama Sumber"
                 app:layout_constraintStart_toStartOf="@id/textViewTitle"
-                app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
+                app:layout_constraintTop_toBottomOf="@id/textViewTitle"/>
 
         <!-- Tanggal Publikasi -->
         <TextView
@@ -62,7 +64,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/textViewTitle"
                 app:layout_constraintTop_toTopOf="@id/textViewSource"
-                tools:text="7 Okt 2025" />
+                tools:text="7 Okt 2025"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

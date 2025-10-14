@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.midtermexam.R
+import com.example.midtermexam.adapter.CommentAdapter
 import com.example.midtermexam.data.Article
 import com.example.midtermexam.data.Comment
 import com.example.midtermexam.data.CommentRepository

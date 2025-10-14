@@ -18,7 +18,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:background="#6D94C5">
+                android:background="@color/darkblue">
 
                 <ImageView
                     android:id="@+id/arc"
@@ -46,6 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:text="Profile"
+                    android:textStyle="bold"
                     android:textColor="#F5EFE6"
                     android:textSize="30sp"
                     app:layout_constraintEnd_toEndOf="parent"

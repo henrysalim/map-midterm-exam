@@ -23,6 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="@color/lightcream"
                 android:gravity="center_vertical">
 
             <androidx.appcompat.widget.SearchView
@@ -31,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:iconifiedByDefault="false"
-                    app:queryHint="Cari artikel..." />
+                    app:queryHint="Cari artikel..."/>
 
             <ImageButton
                     android:id="@+id/buttonFilter"
@@ -39,7 +40,7 @@
                     android:layout_height="48dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_filter"
-                    android:contentDescription="Filter Artikel" />
+                    android:contentDescription="Filter Artikel"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -54,8 +55,8 @@
             app:layout_constraintTop_toBottomOf="@id/cardSearch"
             app:layout_constraintBottom_toTopOf="@+id/layout_pagination"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.0"/>
     <LinearLayout
             android:id="@+id/layout_pagination"
             android:layout_width="match_parent"
@@ -75,20 +76,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Sebelumnya" />
+                android:textColor="@color/black"
+                android:text="Sebelumnya"/>
 
         <TextView
                 android:id="@+id/textViewPageNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                tools:text="Halaman: 1" />
+                tools:text="Halaman: 1"/>
 
         <Button
                 android:id="@+id/buttonNextPage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Berikutnya" />
+                android:backgroundTint="@color/darkblue"
+                android:text="Berikutnya"/>
     </LinearLayout>
 
     <ProgressBar
@@ -99,7 +102,7 @@
             app:layout_constraintBottom_toTopOf="@id/layout_pagination"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardSearch" />
+            app:layout_constraintTop_toBottomOf="@id/cardSearch"/>
 
     <TextView
             android:id="@+id/textViewError"
@@ -110,7 +113,7 @@
             app:layout_constraintBottom_toTopOf="@id/layout_pagination"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardSearch" />
+            app:layout_constraintTop_toBottomOf="@id/cardSearch"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabScrollToTop"
@@ -118,9 +121,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:contentDescription="Kembali ke atas"
+            android:backgroundTint="@color/darkblue"
             android:src="@drawable/ic_arrow_upward"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/layout_pagination"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

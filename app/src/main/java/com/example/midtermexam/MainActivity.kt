@@ -1,6 +1,7 @@
 package com.example.midtermexam
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -33,6 +34,17 @@ class MainActivity : AppCompatActivity() {
         // 4. Hubungkan Action Bar (Toolbar) dan Bottom Navigation dengan NavController
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.profileFragment -> {
+                    toolbar.visibility = View.GONE
+                }
+                else -> {
+                    toolbar.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
     /**
