@@ -16,6 +16,15 @@
     <string name="hello_blank_fragment">Hello Blank Fragment</string>
     <string name="accuracy_format">Akurasi: %.1f%%</string>
     <string name="pin_history_item">Pin or unpin history item</string>
+    <string name="registerTitle">Register</string>
+    <string name="loginTitle">Login</string>
+    <string name="name">Nama Lengkap</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="btnSubmit">Submit</string>
+    <string name="dontHaveAccText">Don\'t have an account?</string>
+    <string name="alreadyHaveAccText">Already have an account?</string>
 
     <!-- Profile !-->
     <string name="usnDummy">User Dummy</string>
