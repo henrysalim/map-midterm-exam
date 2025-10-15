@@ -3,7 +3,32 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/nav_graph"
-            app:startDestination="@id/homeFragment">
+            app:startDestination="@id/registerFragment">
+
+    <!--  Fragment to display RegisterFragment  -->
+    <fragment
+            android:id="@+id/registerFragment"
+            android:name="com.example.midtermexam.ui.auth.RegisterFragment"
+            android:label="Register"
+            tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_RegisterFragment_to_LoginFragment"
+            app:destination="@+id/loginFragment" />
+    </fragment>
+
+    <!--  Fragment to display LoginFragment  -->
+    <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.example.midtermexam.ui.auth.LoginFragment"
+            android:label="Login"
+            tools:layout="@layout/fragment_login">
+        <action
+                android:id="@+id/action_LoginFragment_to_HomeFragment"
+                app:destination="@+id/homeFragment" />
+        <argument
+                android:name="successMessage"
+                app:argType="string" />
+    </fragment>
 
     <!--  Fragment to display HomeFragment  -->
     <fragment

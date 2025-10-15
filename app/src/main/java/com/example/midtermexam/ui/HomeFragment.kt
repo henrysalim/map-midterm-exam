@@ -13,9 +13,12 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.example.midtermexam.R
+import com.example.midtermexam.model.AuthViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -25,13 +28,16 @@ import java.io.FileOutputStream
 import java.lang.Exception
 
 class HomeFragment : Fragment() {
+    // inisialisasi variabel-variabel
     private lateinit var ivPreview: ImageView
     private lateinit var btnSelectImage: Button
     private lateinit var btnUploadImage: Button
     private lateinit var btnOpenCamera: Button
     private var cameraImageUri: Uri? = null
-
     private var selectedImageUri: Uri? = null
+
+    // inisialisasi variabel authViewModel untuk mengambil data current logged in user
+    private val authViewModel: AuthViewModel by activityViewModels()
 
     /*
         Initialize image preview and buttons (select image button, upload image button,
@@ -40,6 +46,11 @@ class HomeFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val successMessage = authViewModel.successMessage.value.toString()
+        if (successMessage.isNotBlank())
+            Toast.makeText(requireContext(), successMessage, Toast.LENGTH_SHORT).show()
+
 
         ivPreview = view.findViewById(R.id.iv_preview)
         btnSelectImage = view.findViewById(R.id.selectImagebtn)

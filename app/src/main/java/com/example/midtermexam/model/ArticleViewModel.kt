@@ -22,7 +22,7 @@ class ArticleViewModel : ViewModel() {
     val errorMessage: LiveData<String?> = _errorMessage
 
     var currentPage = 1
-    var apiQuery = "\"kesehatan mental\" OR \"stres\" OR \"kecemasan\""
+    var apiQuery = "\"kesehatan mental\" OR \"psikologis\" OR \"kecemasan\" OR \"emosi\" OR \"depresi\""
 
     fun fetchArticles(page: Int, apiKey: String) {
         _isLoading.value = true
