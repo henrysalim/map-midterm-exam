@@ -39,27 +39,4 @@ class AboutFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_about, container, false)
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val btnBack = view.findViewById<View>(R.id.abt_back)
-
-        addClickEffect(btnBack) {
-            findNavController().navigate(R.id.action_AboutFragment_to_ProfileFragment)
-        }
-
-    }
-
-    // efek klik biar tombol ada animasi kecil
-    private fun addClickEffect(view: View, onClick: () -> Unit) {
-        view.setOnTouchListener { v, event ->
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> v.animate().scaleX(0.97f).scaleY(0.97f).setDuration(100).start()
-                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> v.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
-            }
-            false
-        }
-        view.setOnClickListener { onClick() }
-    }
 }

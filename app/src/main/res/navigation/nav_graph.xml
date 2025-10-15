@@ -90,7 +90,7 @@
     <fragment
             android:id="@+id/TncFragment"
             android:name="com.example.midtermexam.ui.TncFragment"
-            android:label="Terms and Conditions"
+            android:label="Privacy Policy"
             tools:layout="@layout/fragment_tnc" />
 
 </navigation>
