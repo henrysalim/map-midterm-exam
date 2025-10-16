@@ -6,43 +6,51 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.midtermexam.R
+import com.example.midtermexam.databinding.FragmentProfileBinding
+import com.example.midtermexam.model.AuthViewModel
 
 class ProfileFragment : Fragment() {
 
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
+    private val authViewModel: AuthViewModel by activityViewModels()
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    ): View {
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val btnEditProfile = view.findViewById<View>(R.id.acc_edtprof)
-        val btnChangePassword = view.findViewById<View>(R.id.acc_edtpw)
-        val btnAbout = view.findViewById<View>(R.id.acc_about)
-        val btnTnc = view.findViewById<View>(R.id.acc_tnc)
-        val btnLogout = view.findViewById<View>(R.id.acc_logout)
+        // Observasi data user
+        authViewModel.fullName.observe(viewLifecycleOwner) { name ->
+            binding.accName.text = name ?: "Nama belum diisi"
+        }
 
-        addClickEffect(btnEditProfile) {
+        // Klik tombol navigasi pakai binding langsung
+        addClickEffect(binding.accEdtprof) {
             findNavController().navigate(R.id.action_ProfileFragment_to_EditProfileFragment)
         }
-
-        addClickEffect(btnChangePassword) {
+        addClickEffect(binding.accEdtpw) {
             findNavController().navigate(R.id.action_ProfileFragment_to_ChangePasswordFragment)
         }
-
-        addClickEffect(btnAbout) {
+        addClickEffect(binding.accAbout) {
             findNavController().navigate(R.id.action_ProfileFragment_to_AboutFragment)
         }
-
-        addClickEffect(btnTnc) {
+        addClickEffect(binding.accTnc) {
             findNavController().navigate(R.id.action_ProfileFragment_to_TncFragment)
         }
-
+        addClickEffect(binding.accLogout) {
+            // logout logic di sini
+        }
     }
 
     // efek klik biar tombol ada animasi kecil
@@ -55,5 +63,10 @@ class ProfileFragment : Fragment() {
             false
         }
         view.setOnClickListener { onClick() }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

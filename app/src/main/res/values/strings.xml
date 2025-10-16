@@ -35,8 +35,8 @@
     <string name="logoutMenuTitle">Logout</string>
 
     <!-- Edit Profile !-->
-    <string name="fnameLabel">First Name</string>
-    <string name="lnameLabel">Last Name</string>
+    <string name="fnameLabel">Name</string>
+    <string name="unameLabel">Username</string>
     <string name="bdateLabel">Birth date</string>
     <string name="bplaceLabel">Birth place</string>
     <string name="pnumberLabel">Phone Number</string>

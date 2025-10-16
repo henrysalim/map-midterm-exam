@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.example.midtermexam.R
+import com.example.midtermexam.databinding.FragmentEditProfileBinding
+import com.example.midtermexam.model.AuthViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,13 +33,33 @@ class EditProfileFragment : Fragment() {
         }
     }
 
+    private lateinit var binding: FragmentEditProfileBinding
+    private val authViewModel: AuthViewModel by activityViewModels()  // <<< ini penting
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_profile, container, false)
+    ): View {
+        binding = FragmentEditProfileBinding.inflate(inflater, container, false)
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // set data awal dari ViewModel
+        authViewModel.fullName.observe(viewLifecycleOwner) { name ->
+            binding.firstnameEditText.setText(name ?: "")
+        }
+        authViewModel.username.observe(viewLifecycleOwner) { uname ->
+            binding.usernameEditText.setText(uname ?: "")
+        }
+        authViewModel.email.observe(viewLifecycleOwner) { email ->
+            binding.emailEditText.setText(email ?: "")
+        }
+    }
+
 
     companion object {
         /**

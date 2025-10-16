@@ -90,7 +90,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/firstnameLayout"
                 android:layout_width="289dp"
-                android:layout_height="85dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -115,23 +115,24 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="235dp"
-                    android:layout_height="54dp"
+                    android:layout_height="60dp"
                     android:layout_marginStart="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView6"
                     app:layout_constraintTop_toBottomOf="@+id/firstname_tv">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/firstnameEditText"
                         android:layout_width="match_parent"
-                        android:layout_height="46dp"
-                        android:hint="@string/fnameInput" />
+                        android:layout_height="50dp"
+                        android:hint="" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/lastnameLayout"
+                android:id="@+id/usernameLayout"
                 android:layout_width="286dp"
-                android:layout_height="85dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.517"
@@ -145,41 +146,42 @@
                     android:src="@drawable/edtprof_lname"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lastname_tv" />
+                    app:layout_constraintTop_toBottomOf="@+id/username_tv" />
 
                 <TextView
-                    android:id="@+id/lastname_tv"
+                    android:id="@+id/username_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/lnameLabel"
+                    android:text="@string/unameLabel"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout"
                     android:layout_width="235dp"
-                    android:layout_height="54dp"
+                    android:layout_height="60dp"
                     android:layout_marginStart="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView7"
-                    app:layout_constraintTop_toBottomOf="@+id/lastname_tv">
+                    app:layout_constraintTop_toBottomOf="@+id/username_tv">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/usernameEditText"
                         android:layout_width="match_parent"
-                        android:layout_height="46dp"
-                        android:hint="@string/lnameInput" />
+                        android:layout_height="50dp"
+                        android:hint="" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/birthdate_constraint"
                 android:layout_width="286dp"
-                android:layout_height="85dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lastnameLayout">
+                app:layout_constraintTop_toBottomOf="@+id/usernameLayout">
 
                 <ImageView
                     android:id="@+id/imageView8"
@@ -217,7 +219,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/birthplace_constraint"
                 android:layout_width="286dp"
-                android:layout_height="85dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.551"
@@ -243,7 +245,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="235dp"
-                    android:layout_height="54dp"
+                    android:layout_height="60dp"
                     android:layout_marginStart="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView11"
@@ -251,7 +253,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="46dp"
+                        android:layout_height="50dp"
                         android:hint="@string/bplaceInput" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -259,7 +261,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/phonenumber_constraint"
                 android:layout_width="286dp"
-                android:layout_height="85dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.551"
@@ -285,7 +287,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="235dp"
-                    android:layout_height="54dp"
+                    android:layout_height="60dp"
                     android:layout_marginStart="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ic_phone_number"
@@ -293,7 +295,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="46dp"
+                        android:layout_height="50dp"
                         android:hint="@string/pnumberInput"
                         android:inputType="phone" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -303,7 +305,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/email"
                 android:layout_width="286dp"
-                android:layout_height="85dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.551"
@@ -329,16 +331,17 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="235dp"
-                    android:layout_height="54dp"
+                    android:layout_height="60dp"
                     android:layout_marginStart="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ic_email"
                     app:layout_constraintTop_toBottomOf="@+id/email_tv">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/emailEditText"
                         android:layout_width="match_parent"
-                        android:layout_height="46dp"
-                        android:hint="@string/emailInput"
+                        android:layout_height="52dp"
+                        android:hint=""
                         android:inputType="textEmailAddress" />
                 </com.google.android.material.textfield.TextInputLayout>
 
