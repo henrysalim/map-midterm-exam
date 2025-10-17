@@ -1,3 +1,4 @@
+<!-- Root layout utama yang menggunakan ConstraintLayout agar posisi elemen bisa fleksibel dan responsif -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -5,21 +6,25 @@
     android:layout_height="match_parent"
     android:background="#E8DFCA">
 
+    <!-- ScrollView agar seluruh isi halaman (tombol menu) bisa discroll ke bawah jika konten melebihi tinggi layar -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible">
 
+        <!-- child layout menggunakan LinearLayout sebagai wadah vertikal semua konten profil -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Bagian header profil dengan background biru dan foto profil di atas arc -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="150dp"
                 android:background="@color/darkblue">
 
+                <!-- Gambar background melengkung (arc) di bagian bawah header -->
                 <ImageView
                     android:id="@+id/arc"
                     android:layout_width="0dp"
@@ -28,10 +33,10 @@
                     android:scaleType="fitXY"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:srcCompat="@drawable/arc_3" />
 
+                <!-- Gambar profil pengguna -->
                 <ImageView
                     android:id="@+id/profilePicture"
                     android:layout_width="wrap_content"
@@ -41,22 +46,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/arc"
                     app:srcCompat="@drawable/user_2" />
-
-                <TextView
-                    android:id="@+id/profileHeader"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:text="@string/menuProfileTitle"
-                    android:textStyle="bold"
-                    android:textColor="#F5EFE6"
-                    android:textSize="30sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Nama akun pengguna di bawah header -->
             <TextView
                 android:id="@+id/acc_name"
                 android:layout_width="match_parent"
@@ -68,6 +60,7 @@
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
+            <!-- Tombol menuju Edit Profile -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/acc_edtprof"
                 android:layout_width="match_parent"
@@ -86,9 +79,9 @@
                     android:id="@+id/acc_edtprof_img"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:srcCompat="@drawable/acc_edtprof" />
 
                 <TextView
@@ -99,20 +92,21 @@
                     android:text="@string/eprofMenuTitle"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/acc_edtprof_img"
-                    app:layout_constraintTop_toTopOf="@+id/acc_edtprof_img" />
+                    app:layout_constraintTop_toTopOf="@+id/acc_edtprof_img"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
                 <ImageView
                     android:id="@+id/acc_arrow_ic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:srcCompat="@drawable/acc_arrow" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Tombol menuju Change Password -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/acc_edtpw"
                 android:layout_width="match_parent"
@@ -131,9 +125,9 @@
                     android:id="@+id/acc_edtpw_img"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:srcCompat="@drawable/acc_edtpw" />
 
                 <TextView
@@ -144,20 +138,21 @@
                     android:text="@string/cpassMenuTitle"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/acc_edtpw_img"
-                    app:layout_constraintTop_toTopOf="@+id/acc_edtpw_img" />
+                    app:layout_constraintTop_toTopOf="@+id/acc_edtpw_img"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
                 <ImageView
                     android:id="@+id/acc_arrow_ic2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:srcCompat="@drawable/acc_arrow" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Tombol menuju About Page -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/acc_about"
                 android:layout_width="match_parent"
@@ -176,9 +171,9 @@
                     android:id="@+id/acc_about_img"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:srcCompat="@drawable/acc_about" />
 
                 <TextView
@@ -189,20 +184,21 @@
                     android:text="@string/aboutMenuTitle"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/acc_about_img"
-                    app:layout_constraintTop_toTopOf="@+id/acc_about_img" />
+                    app:layout_constraintTop_toTopOf="@+id/acc_about_img"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
                 <ImageView
                     android:id="@+id/acc_arrow_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:srcCompat="@drawable/acc_arrow" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Tombol menuju Privacy Policy -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/acc_tnc"
                 android:layout_width="match_parent"
@@ -221,9 +217,9 @@
                     android:id="@+id/acc_tnc_img"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:srcCompat="@drawable/acc_tnc" />
 
                 <TextView
@@ -234,20 +230,21 @@
                     android:text="@string/ppolicyMenuTitle"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/acc_tnc_img"
-                    app:layout_constraintTop_toTopOf="@+id/acc_tnc_img" />
+                    app:layout_constraintTop_toTopOf="@+id/acc_tnc_img"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
                 <ImageView
                     android:id="@+id/acc_arrow_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:srcCompat="@drawable/acc_arrow" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Tombol Logout -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/acc_logout"
                 android:layout_width="match_parent"
@@ -266,9 +263,9 @@
                     android:id="@+id/acc_logout_img"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:srcCompat="@drawable/acc_logout" />
 
                 <TextView
@@ -279,17 +276,17 @@
                     android:text="@string/logoutMenuTitle"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/acc_logout_img"
-                    app:layout_constraintTop_toTopOf="@+id/acc_logout_img" />
+                    app:layout_constraintTop_toTopOf="@+id/acc_logout_img"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
                 <ImageView
                     android:id="@+id/acc_arrow_ic5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:srcCompat="@drawable/acc_arrow" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

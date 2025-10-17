@@ -6,41 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.midtermexam.R
 import com.example.midtermexam.databinding.FragmentEditProfileBinding
 import com.example.midtermexam.model.AuthViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [EditProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class EditProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    // View binding untuk mengakses elemen UI di layout fragment_edit_profile.xml
     private lateinit var binding: FragmentEditProfileBinding
-    private val authViewModel: AuthViewModel by activityViewModels()  // <<< ini penting
+
+    // Menggunakan shared ViewModel (AuthViewModel) agar data bisa diakses antar fragment
+    private val authViewModel: AuthViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Inflate layout dan inisialisasi binding
         binding = FragmentEditProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -48,36 +32,24 @@ class EditProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // set data awal dari ViewModel
+        // 🔹 Menampilkan data nama, username, dan email pengguna dari ViewModel ke dalam input form
         authViewModel.fullName.observe(viewLifecycleOwner) { name ->
             binding.firstnameEditText.setText(name ?: "")
         }
+
         authViewModel.username.observe(viewLifecycleOwner) { uname ->
             binding.usernameEditText.setText(uname ?: "")
         }
+
         authViewModel.email.observe(viewLifecycleOwner) { email ->
             binding.emailEditText.setText(email ?: "")
         }
-    }
 
+        // 🔹 Tombol Cancel: kembali ke halaman Profile tanpa menyimpan perubahan
+        binding.cancelbtn.setOnClickListener {
+            findNavController().navigate(R.id.action_EditProfileFragment_to_ProfileFragment)
+        }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EditProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EditProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        // Tombol save changes belum ada function/logicnya karena belum menyentuh tahap backend
     }
 }

@@ -92,6 +92,10 @@
             android:name="com.example.midtermexam.ui.EditProfileFragment"
             android:label="Edit Profile"
             tools:layout="@layout/fragment_edit_profile" />
+    <!-- Action back from Edit profile to profile !-->
+    <action
+        android:id="@+id/action_EditProfileFragment_to_ProfileFragment"
+        app:destination="@id/profileFragment" />
 
     <!--  Fragment to display ChangePasswordFragment  -->
     <fragment
@@ -100,6 +104,11 @@
             android:label="Change Password"
             tools:layout="@layout/fragment_change_password" />
 
+    <!-- Action back from change password to profile !-->
+    <action
+        android:id="@+id/action_ChangePasswordFragment_to_ProfileFragment"
+        app:destination="@id/profileFragment" />
+
     <!--  Fragment to display AboutFragment  -->
     <fragment
             android:id="@+id/AboutFragment"
@@ -107,11 +116,12 @@
             android:label="About App"
             tools:layout="@layout/fragment_about" />
 
-    <!--  Fragment to display TncFragment  -->
+    <!-- Action back from about to profile !-->
     <action
         android:id="@+id/action_AboutFragment_to_ProfileFragment"
         app:destination="@id/profileFragment"/>
 
+    <!--  Fragment to display Privacy and Policy Fragment  -->
     <fragment
             android:id="@+id/TncFragment"
             android:name="com.example.midtermexam.ui.TncFragment"
