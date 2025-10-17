@@ -1,6 +1,6 @@
 # map-midterm-exam
 
-Repository for Mobile Application Programming Midterm Exam, integrated with Machine Learning to detect whether someone is depressed/not by scanning their facial expressions
+Repository for IF570 Mobile Application Programming Midterm Exam for Group A, integrated with Machine Learning to detect whether someone is depressed/not by scanning their facial expressions
 
 ## **Group Members**
 * **Henry Salim**
@@ -8,12 +8,65 @@ Repository for Mobile Application Programming Midterm Exam, integrated with Mach
 * **Willbert Budi Lian**
 * **Yehezkiel Natanael**
 
-## Key Features & Benefits
+Aplikasi Deteksi Depresi Berbasis Android
 
-*   **Depression Detection:** Utilizes machine learning models to assess potential depression indicators.
-*   **Mobile Application:** Designed as a mobile app for accessibility and user convenience.
-*   **Midterm Project:** Developed as a submission for a Mobile Application Programming midterm exam.
-*   **Kotlin Based:** Implemented using Kotlin, a modern and concise language for Android development.
+Aplikasi ini adalah sebuah prototipe yang dirancang untuk membantu pengguna dalam mendeteksi potensi tingkat depresi melalui analisis gambar wajah. Dibangun dengan teknologi Android modern, aplikasi ini menawarkan antarmuka yang ramah pengguna dan fungsionalitas yang kuat.
+
+## ✨ Fitur Utama
+
+Aplikasi ini dirancang dengan beberapa fitur inti yang berpusat pada pemindaian wajah untuk prediksi depresi, didukung oleh fungsionalitas yang modern dan user-friendly.
+
+* **1. Prediksi Tingkat Depresi Melalui Gambar**
+
+Fitur paling utama dari aplikasi ini adalah kemampuannya untuk menganalisis gambar wajah dan memberikan hasil prediksi tingkat depresi.
+
+Dua Pilihan Sumber Gambar: Pengguna memiliki fleksibilitas untuk memilih gambar dari dua sumber:
+
+Buka Kamera: Mengambil foto secara langsung menggunakan kamera perangkat untuk analisis real-time.
+
+Pilih dari Galeri: Mengunggah gambar yang sudah ada dari galeri ponsel.
+
+Pratinjau Gambar: Sebelum diunggah, gambar yang dipilih atau diambil akan ditampilkan dalam pratinjau (ImageView) untuk memastikan pengguna memilih gambar yang benar.
+
+Proses Unggah dan Analisis: Setelah pengguna menekan tombol "Upload", aplikasi akan:
+
+Mengonversi gambar ke format yang sesuai (MultipartBody.Part).
+
+Mengirim gambar ke backend untuk diproses oleh model machine learning.
+
+Menampilkan hasil prediksi (misalnya, "Tingkat Depresi: Depresi") langsung di bawah area pratinjau.
+
+Manajemen Izin (Permission Handling): Aplikasi secara cerdas meminta izin yang diperlukan (CAMERA dan READ_MEDIA_IMAGES/READ_EXTERNAL_STORAGE) sebelum mengakses kamera atau galeri, memastikan aplikasi berjalan lancar dan aman sesuai panduan Android terbaru.
+
+* **2. Riwayat Pemindaian (Scan History)**
+
+Semua hasil pemindaian disimpan dalam daftar riwayat yang interaktif.
+
+Tampilan Berbasis Card: Setiap entri riwayat ditampilkan dalam card yang informatif.
+
+Pin & Urutkan: Pengguna dapat menandai item riwayat sebagai "penting". Item yang di-pin akan selalu berada di urutan teratas, diikuti oleh item lain yang diurutkan berdasarkan waktu terbaru.
+
+* **3. Fitur Artikel Edukatif**
+
+Aplikasi ini menyediakan kumpulan artikel pilihan untuk meningkatkan kesadaran pengguna tentang kesehatan mental.
+
+Daftar Artikel Menarik: Artikel disajikan dalam format card yang menarik secara visual, lengkap dengan gambar thumbnail, judul, dan estimasi waktu baca.
+
+Akses ke Sumber Asli: Saat artikel ditekan, aplikasi akan membuka browser untuk menampilkan konten lengkap dari sumbernya.
+
+* **🏛️ Arsitektur Modern**
+
+Aplikasi ini dibangun menggunakan komponen dan pustaka modern yang direkomendasikan oleh Google.
+
+Kotlin & Coroutines: Kode ditulis sepenuhnya dalam Kotlin dengan memanfaatkan Coroutines untuk menangani proses asynchronous seperti upload gambar tanpa memblokir UI.
+
+Activity Result API: Menggunakan API modern (registerForActivityResult) untuk menangani permintaan izin dan hasil dari galeri/kamera, menggantikan metode onActivityResult yang sudah usang.
+
+Fragment & ViewModel: Menggunakan arsitektur berbasis Fragment dengan ViewModel (AuthViewModel) untuk mengelola dan mempertahankan state data, bahkan saat konfigurasi perangkat berubah (seperti rotasi layar).
+
+View Binding & Coil: Menggunakan View Binding untuk interaksi UI yang aman dan Coil untuk memuat gambar dari URI secara efisien ke ImageView.
+
+FileProvider: Mengimplementasikan FileProvider untuk berbagi URI file dengan aman antara aplikasi, sesuai dengan praktik keamanan terbaik Android.
 
 ## Prerequisites & Dependencies
 
