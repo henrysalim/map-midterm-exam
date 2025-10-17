@@ -40,7 +40,10 @@
                     android:layout_height="48dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_filter"
+                    android:padding="8dp"
+                    android:scaleType="centerInside"
                     android:contentDescription="Filter Artikel"/>
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
