@@ -25,6 +25,7 @@
     <string name="btnSubmit">Submit</string>
     <string name="dontHaveAccText">Don\'t have an account?</string>
     <string name="alreadyHaveAccText">Already have an account?</string>
+    <string name="filterContentDesc">Filter Artikel</string>
 
     <!-- Profile !-->
     <string name="usnDummy">User Dummy</string>
@@ -65,25 +66,34 @@
 
     <!-- About App !-->
     <string name="aboutDescription">
-        \t\t\tAplikasi ini dirancang untuk membantu pengguna mengenali tanda-tanda awal depresi melalui ekspresi wajah secara cepat dan mudah.\n\n
+        \t\t\tAplikasi ini dirancang untuk membantu pengguna mengenali tanda-tanda awal depresi melalui ekspresi wajah
+        secara cepat dan mudah.\n\n
 
-        \t\t\tDengan memanfaatkan teknologi machine learning dan analisis ekspresi wajah, aplikasi ini memberikan hasil deteksi yang informatif agar pengguna dapat lebih sadar terhadap kondisi emosionalnya sendiri.\n\n
+        \t\t\tDengan memanfaatkan teknologi machine learning dan analisis ekspresi wajah, aplikasi ini memberikan hasil
+        deteksi yang informatif agar pengguna dapat lebih sadar terhadap kondisi emosionalnya sendiri.\n\n
 
-        \t\t\tMelalui fitur Scan, pengguna dapat mengambil atau mengunggah foto, lalu sistem akan menganalisis ekspresi wajah dan menampilkan hasilnya. Semua hasil tersimpan di menu History, sehingga perubahan emosi dapat dipantau dari waktu ke waktu.\n\n
-        \t\t\tSelain itu, halaman Artikel menyediakan panduan, latihan pernapasan, serta tips sederhana untuk membantu mengurangi stres dan menjaga keseimbangan mental.\n\n
-</string>
+        \t\t\tMelalui fitur Scan, pengguna dapat mengambil atau mengunggah foto, lalu sistem akan menganalisis ekspresi
+        wajah dan menampilkan hasilnya. Semua hasil tersimpan di menu History, sehingga perubahan emosi dapat dipantau
+        dari waktu ke waktu.\n\n
+        \t\t\tSelain itu, halaman Artikel menyediakan panduan, latihan pernapasan, serta tips sederhana untuk membantu
+        mengurangi stres dan menjaga keseimbangan mental.\n\n
+    </string>
 
     <!-- Privacy Policy !-->
     <string name="privacy_policy_text">
-\t\t\tAplikasi ini menghargai privasi dan keamanan data setiap pengguna. Kami berkomitmen untuk menjaga kerahasiaan informasi yang Anda berikan saat menggunakan fitur analisis ekspresi wajah.\n\n
+        \t\t\tAplikasi ini menghargai privasi dan keamanan data setiap pengguna. Kami berkomitmen untuk menjaga
+        kerahasiaan informasi yang Anda berikan saat menggunakan fitur analisis ekspresi wajah.\n\n
 
-\t\t\tData yang diunggah atau dipindai melalui fitur Scan hanya digunakan untuk tujuan analisis sementara dan tidak disimpan secara permanen di server. Semua hasil deteksi bersifat pribadi dan hanya dapat diakses oleh pengguna di perangkat masing-masing.\n\n
+        \t\t\tData yang diunggah atau dipindai melalui fitur Scan hanya digunakan untuk tujuan analisis sementara dan
+        tidak disimpan secara permanen di server. Semua hasil deteksi bersifat pribadi dan hanya dapat diakses oleh
+        pengguna di perangkat masing-masing.\n\n
 
-\t\t\tKami tidak mengumpulkan informasi pribadi seperti nama, lokasi, atau data sensitif lainnya tanpa izin pengguna. Jika Anda mengaktifkan fitur tambahan seperti riwayat hasil atau profil pengguna, data tersebut disimpan secara lokal dan dapat dihapus kapan saja melalui pengaturan aplikasi.\n\n
+        \t\t\tKami tidak mengumpulkan informasi pribadi seperti nama, lokasi, atau data sensitif lainnya tanpa izin
+        pengguna. Jika Anda mengaktifkan fitur tambahan seperti riwayat hasil atau profil pengguna, data tersebut
+        disimpan secara lokal dan dapat dihapus kapan saja melalui pengaturan aplikasi.\n\n
 
-\t\t\tDengan menggunakan aplikasi ini, Anda menyetujui kebijakan privasi ini. Kami dapat memperbarui isi kebijakan sewaktu-waktu untuk meningkatkan keamanan dan kenyamanan pengguna. Disarankan untuk membaca pembaruan secara berkala.
-</string>
-
-
-
+        \t\t\tDengan menggunakan aplikasi ini, Anda menyetujui kebijakan privasi ini. Kami dapat memperbarui isi
+        kebijakan sewaktu-waktu untuk meningkatkan keamanan dan kenyamanan pengguna. Disarankan untuk membaca pembaruan
+        secara berkala.
+    </string>
 </resources>

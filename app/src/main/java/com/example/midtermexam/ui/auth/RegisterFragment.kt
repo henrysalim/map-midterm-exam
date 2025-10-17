@@ -57,8 +57,13 @@ class RegisterFragment : Fragment() {
 
         // jika semua input tidak null
         if (fullName.isNotBlank() && username.isNotBlank() && email.isNotBlank() && password.isNotBlank()) {
-            if(password.length < 8) Toast.makeText(requireContext(), "Password min. 8 karakter", Toast.LENGTH_SHORT).show()
-            else {
+            if (password.length < 8) // jika password kurang dari 8 karakter, tampilkan pesan melalui Toast
+                Toast.makeText(
+                    requireContext(),
+                    "Password min. 8 karakter",
+                    Toast.LENGTH_SHORT
+                ).show()
+            else { // jika panjang password sudah sesuai
                 try {
                     // isi data pada AuthViewModel dengan data tsb
                     authViewModel.setFullName(fullName)
