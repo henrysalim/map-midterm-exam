@@ -10,11 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.example.midtermexam.R
@@ -23,6 +23,7 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.internal.format
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.Exception
@@ -33,8 +34,13 @@ class HomeFragment : Fragment() {
     private lateinit var btnSelectImage: Button
     private lateinit var btnUploadImage: Button
     private lateinit var btnOpenCamera: Button
+    private lateinit var depressionPredictionResult: TextView
     private var cameraImageUri: Uri? = null
     private var selectedImageUri: Uri? = null
+
+    // for dummy depression prediction
+    private lateinit var predictionResult: String
+    private lateinit var formattedPredictionResult: String
 
     // inisialisasi variabel authViewModel untuk mengambil data current logged in user
     private val authViewModel: AuthViewModel by activityViewModels()
@@ -51,11 +57,13 @@ class HomeFragment : Fragment() {
         if (successMessage.isNotBlank())
             Toast.makeText(requireContext(), successMessage, Toast.LENGTH_SHORT).show()
 
-
         ivPreview = view.findViewById(R.id.iv_preview)
         btnSelectImage = view.findViewById(R.id.selectImagebtn)
         btnUploadImage = view.findViewById(R.id.uploadImageBtn)
         btnOpenCamera = view.findViewById(R.id.openCameraBtn)
+        depressionPredictionResult = view.findViewById(R.id.depressionPrediction)
+        predictionResult = "Depressed"
+        formattedPredictionResult = getString(R.string.depressionPrediction, predictionResult)
 
         btnOpenCamera.setOnClickListener {
             requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
@@ -98,6 +106,9 @@ class HomeFragment : Fragment() {
 
                     // Show a loading indicator
                     Toast.makeText(requireContext(), "Uploading...", Toast.LENGTH_SHORT).show()
+                    // dummy result for depression prediction
+                    depressionPredictionResult.text = formattedPredictionResult
+                    depressionPredictionResult.visibility = View.VISIBLE
                 } catch (e: Exception) {
                     // if there's any error, display the error message using Toast
                     Toast.makeText(requireContext(), "Upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -157,31 +168,37 @@ class HomeFragment : Fragment() {
             }
         }
 
-    // handle pick image from gallery
+    // handle pick image from gallery, then set the image preview to be this image
     private val pickImageFromGalleryLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
                 ivPreview.load(it)
+                selectedImageUri = it
+                btnUploadImage.visibility = View.VISIBLE
             }
         }
 
-    // handle take photo in camera
+    // handle take photo in camera, then set the image preview to be this image
     private val takePictureLauncher =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { success: Boolean ->
             if (success) {
-                cameraImageUri?.let { ivPreview.load(it) }
+                cameraImageUri?.let {
+                    ivPreview.load(it)
+                    selectedImageUri = it
+                }
+                btnUploadImage.visibility = View.VISIBLE
             }
         }
 
     // handle activity results for picking an image
-    private val imagePickerLauncher =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let {
-                selectedImageUri = it
-                ivPreview.load(it)
-                btnUploadImage.isEnabled = true
-            }
-        }
+//    private val imagePickerLauncher =
+//        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+//            uri?.let {
+//                selectedImageUri = it
+//                ivPreview.load(it)
+//                btnUploadImage.isEnabled = true
+//            }
+//        }
 
     // launch the camera
     private fun launchCamera() {
