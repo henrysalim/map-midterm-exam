@@ -10,7 +10,9 @@ import retrofit2.http.Query
 // File: api/GNewsApiService.kt
 // Di file NewsApiService.kt
 interface NewsApiService {
+    // make route to request API
     @GET("api/v4/search")
+    // add query parameter to the search API
     suspend fun searchArticles(
         @Query("q") query: String,
         @Query("lang") lang: String = "id",
@@ -21,8 +23,10 @@ interface NewsApiService {
 
 
     companion object {
+        // define the API base URL
         private const val BASE_URL = "https://gnews.io/"
 
+        // create a new API Service with Retrofit
         fun create(): NewsApiService {
             val retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)

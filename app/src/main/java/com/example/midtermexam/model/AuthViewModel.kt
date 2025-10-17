@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 
 class AuthViewModel : ViewModel() {
     /*
-    buat variabel untuk menyimpan data register & login dummy dengan MutableLiveData agar
-    data bersifat observable (jika berubah, ada listenernya dan kita dapat segera update)
+        buat variabel untuk menyimpan data register & login dummy dengan MutableLiveData agar
+        data bersifat observable (jika berubah, ada listenernya dan kita dapat segera update)
     */
     var isLoggedIn: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
     var fullName: MutableLiveData<String?> = MutableLiveData<String?>(null)
