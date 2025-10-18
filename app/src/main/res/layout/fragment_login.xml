@@ -9,6 +9,7 @@
         android:layout_marginHorizontal="25sp"
         tools:context=".ui.auth.LoginFragment">
 
+    <!-- Display email input text -->
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldEmail"
             android:layout_width="0dp"
@@ -29,6 +30,7 @@
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Display password input -->
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldPassword"
             android:layout_width="0dp"
@@ -48,6 +50,7 @@
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Display submit button -->
     <Button
             android:id="@+id/loginBtn"
             android:text="@string/btnSubmit"
