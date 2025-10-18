@@ -13,14 +13,18 @@ import com.bumptech.glide.Glide
 import com.example.midtermexam.R
 import com.example.midtermexam.data.Article
 
-class ArticleAdapter(private val onItemClicked: (Article) -> Unit) :
+class ArticleAdapter(
+    private val onItemClicked: (Article) -> Unit // menerima callback onItemClicked
+) :
     ListAdapter<Article, ArticleAdapter.ArticleViewHolder>(DiffCallback) {
 
+    // sub-class untuk menampung data article yang akan ditampilkan
     class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val articleImage: ImageView = itemView.findViewById(R.id.imageViewArticle)
         private val articleTitle: TextView = itemView.findViewById(R.id.textViewTitle)
         private val articleSource: TextView = itemView.findViewById(R.id.textViewSource)
 
+        // bind variabel-variabel dengan value aslinya
         fun bind(article: Article) {
             articleTitle.text = article.title
             articleSource.text = article.source?.name ?: "Sumber tidak diketahui"
@@ -46,6 +50,7 @@ class ArticleAdapter(private val onItemClicked: (Article) -> Unit) :
         return ArticleViewHolder(view)
     }
 
+    // bind article dengan data menggunakan function bind pada sub-class ArticleViewHolder
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = getItem(position)
         holder.bind(article)
@@ -54,6 +59,10 @@ class ArticleAdapter(private val onItemClicked: (Article) -> Unit) :
         }
     }
 
+    /*
+        digunakan untuk membantu Adapter mengecek apakah item dan content yang kembali dibuka adalah
+        item dan content yang sama
+     */
     companion object DiffCallback : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem.url == newItem.url

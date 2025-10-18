@@ -1,45 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:paddingTop="8dp"
-              android:paddingBottom="8dp"
-              android:paddingStart="16dp"
-              android:paddingEnd="16dp">
+<!-- Buat elemen tersusun vertikal dengan LinearLayout -->
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
+    <!-- Tampilkan nama user -->
     <TextView
             android:id="@+id/textViewCommentAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            tools:text="Livia" />
+            tools:text="Livia"/>
 
+    <!-- Tampilkan komentar user -->
     <TextView
             android:id="@+id/textViewCommentText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            tools:text="Tips yang sangat bagus! Meditasi sangat membantu." />
+            tools:text="Tips yang sangat bagus! Meditasi sangat membantu."/>
 
+    <!-- Tampilkan tombol Balas -->
     <TextView
             android:id="@+id/buttonReply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Balas"
+            android:text="@string/comment_reply"
             android:textSize="12sp"
             android:textStyle="bold"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
-            android:textColor="?attr/colorPrimary" />
+            android:textColor="?attr/colorPrimary"/>
 
+    <!-- Tampilkan balasna komentar jika ada -->
     <LinearLayout
             android:id="@+id/repliesContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp" />
+            android:layout_marginTop="4dp"/>
 
 </LinearLayout>

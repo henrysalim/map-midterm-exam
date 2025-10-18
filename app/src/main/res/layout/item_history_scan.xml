@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Menggunakan Material Card untuk tampilan dasar-->
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,6 +16,7 @@
         android:layout_height="wrap_content"
         android:padding="12dp">
 
+        <!-- Tampilkan gambar yang pernah user upload untuk diprediksi-->
         <ImageView
             android:id="@+id/imageViewScan"
             android:layout_width="80dp"
@@ -25,6 +27,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             tools:src="@tools:sample/avatars" />
 
+        <!-- Tampilkan hasil prediksi-->
         <TextView
             android:id="@+id/textViewPrediction"
             android:layout_width="0dp"
@@ -38,6 +41,7 @@
             app:layout_constraintTop_toTopOf="@id/imageViewScan"
             tools:text="Tingkat Depresi: Sedang" />
 
+        <!-- Tampilkan persentase hasil prediksi itu benar-->
         <TextView
             android:id="@+id/textViewConfidence"
             android:layout_width="0dp"
@@ -47,6 +51,7 @@
             app:layout_constraintTop_toBottomOf="@id/textViewPrediction"
             tools:text="Akurasi: 75.2%" />
 
+        <!-- Tampilkan tanggal prediksi-->
         <TextView
             android:id="@+id/textViewScanDate"
             android:layout_width="0dp"
@@ -58,7 +63,7 @@
             app:layout_constraintTop_toBottomOf="@id/textViewConfidence"
             tools:text="12 Oktober 2025, 10:30" />
 
-
+        <!-- Tampilkan teks untuk menawarkan pin/unpin history-->
         <ImageView
             android:id="@+id/imageViewPin"
             android:layout_width="32dp"
