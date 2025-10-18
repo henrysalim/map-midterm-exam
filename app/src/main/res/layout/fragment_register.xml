@@ -9,6 +9,7 @@
         android:layout_marginHorizontal="25sp"
         tools:context=".ui.auth.RegisterFragment">
 
+    <!-- Display full name input text -->
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldFullName"
             android:layout_width="0dp"
@@ -29,6 +30,7 @@
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Display username input text -->
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldUsername"
             android:layout_width="0dp"
@@ -48,6 +50,7 @@
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Display email input text -->
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldEmail"
             android:layout_width="0dp"
@@ -67,6 +70,8 @@
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+
+    <!-- Display password input text -->
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldPassword"
             android:layout_width="0dp"
@@ -86,6 +91,8 @@
                 android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+
+    <!-- Display submit button -->
     <Button
             android:id="@+id/registerBtn"
             android:text="@string/btnSubmit"
