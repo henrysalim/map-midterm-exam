@@ -1,5 +1,5 @@
 <resources>
-    <!-- Homepage, profile, bottom nav -->
+    <!-- Homepage, bottom nav -->
     <string name="app_name">MidTermExam</string>
     <string name="homepageTitle">Welcome to MindLens!</string>
     <string name="homepageDescription">In this app, you can classify whether a facial expression is depressed or not.
@@ -10,13 +10,15 @@
     <string name="selectImageButton">Select an Image</string>
     <string name="image_preview_desc">Image Preview</string>
     <string name="openCameraBtn">Open Camera</string>
-    <string name="menuHomeTitle">Home</string>
-    <string name="menuProfileTitle">Profile</string>
-    <string name="menuArticleTitle">Article</string>
-    <string name="menuHistoryTitle">History</string>
-    <string name="hello_blank_fragment">Hello Blank Fragment</string>
+    <string name="depressionPrediction">Prediction result: %1$s</string>
+    <string name="text_or">OR</string>
+
+    <!-- History page !-->
     <string name="accuracy_format">Akurasi: %.1f%%</string>
     <string name="pin_history_item">Pin or unpin history item</string>
+    <string name="history_empty">Belum ada riwayat pemindaian</string>
+
+    <!-- Auth page !-->
     <string name="registerTitle">Register</string>
     <string name="loginTitle">Login</string>
     <string name="name">Nama Lengkap</string>
@@ -26,8 +28,29 @@
     <string name="btnSubmit">Submit</string>
     <string name="dontHaveAccText">Don\'t have an account?</string>
     <string name="alreadyHaveAccText">Already have an account?</string>
+
+    <!-- Bottom nav !-->
+    <string name="menuHomeTitle">Home</string>
+    <string name="menuProfileTitle">Profile</string>
+    <string name="menuArticleTitle">Article</string>
+    <string name="menuHistoryTitle">History</string>
+
+    <!-- Article !-->
     <string name="filterContentDesc">Filter Artikel</string>
-    <string name="depressionPrediction">Prediction result: %1$s</string>
+    <string name="search_hint_article">Cari artikel...</string>
+    <string name="cd_filter_article">Filter Artikel</string>
+    <string name="pagination_previous">Sebelumnya</string>
+    <string name="pagination_next">Berikutnya</string>
+    <string name="pagination_page_number_format">Halaman: %1$d</string>
+    <string name="cd_scroll_to_top">Kembali ke atas</string>
+    <string name="error_loading_data">Gagal memuat data</string>
+
+    <!-- Article Detail !-->
+    <string name="article_read_more">Baca Selengkapnya di Sumber Asli</string>
+    <string name="article_comments_header">Komentar</string>
+    <string name="article_comment_hint">Tulis komentar Anda...</string>
+    <string name="article_comment_send">Kirim</string>
+    <string name="comment_reply">Balas</string>
 
     <!-- Profile !-->
     <string name="usnDummy">User Dummy</string>

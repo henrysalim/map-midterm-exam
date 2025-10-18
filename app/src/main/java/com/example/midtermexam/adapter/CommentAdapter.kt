@@ -11,10 +11,12 @@ import com.example.midtermexam.R
 import com.example.midtermexam.data.Comment
 
 class CommentAdapter(
+    // CommentAdapter menerima list comment dan callback onReplyClicked
     private val comments: MutableList<Comment>,
     private val onReplyClicked: (Comment) -> Unit
 ) : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
 
+    // sub-class CommentViewHolder untuk menampung data comment
     class CommentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val author: TextView = view.findViewById(R.id.textViewCommentAuthor)
         val text: TextView = view.findViewById(R.id.textViewCommentText)
@@ -40,6 +42,7 @@ class CommentAdapter(
             onReplyClicked(comment)
         }
 
+        // tampilkan komen reply terbaru ke list reply komentar
         holder.repliesContainer.removeAllViews()
         if (comment.replies.isNotEmpty()) {
             val context = holder.itemView.context
@@ -50,8 +53,10 @@ class CommentAdapter(
         }
     }
 
+    // hitung berapa banyak komen
     override fun getItemCount() = comments.size
 
+    // atur style text reply komen
     private fun createReplyTextView(context: Context, reply: Comment): TextView {
         return TextView(context).apply {
             layoutParams = LinearLayout.LayoutParams(

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Agar user dapat scroll tampilan -->
 <androidx.core.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,6 +13,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="16dp">
 
+        <!-- Tampilkan gambar utama berita -->
         <ImageView
                 android:id="@+id/imageViewDetail"
                 android:layout_width="0dp"
@@ -21,6 +23,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:src="@tools:sample/backgrounds/scenic" />
+
+        <!-- Tampilkan judul berita -->
         <TextView
                 android:id="@+id/textViewTitleDetail"
                 android:layout_width="0dp"
@@ -31,6 +35,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Judul Artikel" />
+
+        <!-- Tampilkan sumber berita -->
         <TextView
                 android:id="@+id/textViewSourceDetail"
                 android:layout_width="0dp"
@@ -41,6 +47,8 @@
                 app:layout_constraintTop_toBottomOf="@id/textViewTitleDetail"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="Sumber Berita" />
+
+        <!-- Tampilkan kategori berita -->
         <TextView
                 android:id="@+id/textViewDescriptionDetail"
                 android:layout_width="0dp"
@@ -51,6 +59,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Deskripsi Artikel." />
+
+        <!-- Tampilkan tombol untuk mengarahkan user membaca di halaman asli berita di browser handphone -->
         <Button
                 android:id="@+id/buttonReadMore"
                 android:layout_width="0dp"
@@ -59,22 +69,24 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/darkblue"
-                android:text="Baca Selengkapnya di Sumber Asli"
+                android:text="@string/article_read_more"
                 app:layout_constraintTop_toBottomOf="@id/textViewDescriptionDetail"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
+        <!-- Tampilkan judul bagian komentar -->
         <TextView
                 android:id="@+id/textViewCommentHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Komentar"
+                android:text="@string/article_comments_header"
                 android:layout_marginTop="24dp"
                 android:layout_marginStart="16dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintTop_toBottomOf="@id/buttonReadMore"
                 app:layout_constraintStart_toStartOf="parent" />
 
+        <!-- Gunakan ReyclerView untuk menampung isi komentar pada list_item_comment.xml -->
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewComments"
                 android:layout_width="0dp"
@@ -88,6 +100,7 @@
                 tools:listitem="@layout/list_item_comment"
                 tools:itemCount="2" />
 
+        <!-- Tampilkan text input untuk memasukkan komentar -->
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textFieldComment"
                 android:layout_width="0dp"
@@ -97,7 +110,7 @@
                 android:layout_marginEnd="8dp"
                 app:boxStrokeColor="@color/text_input_box_stroke_color"
                 app:hintTextColor="@color/darkblue"
-                android:hint="Tulis komentar Anda..."
+                android:hint="@string/article_comment_hint"
                 app:layout_constraintTop_toBottomOf="@id/recyclerViewComments"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/buttonAddComment">
@@ -108,13 +121,14 @@
                     android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Tampilkan button untuk memasukkan komentar -->
         <Button
                 android:id="@+id/buttonAddComment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/darkblue"
-                android:text="Kirim"
+                android:text="@string/article_comment_send"
                 app:layout_constraintTop_toTopOf="@id/textFieldComment"
                 app:layout_constraintBottom_toBottomOf="@id/textFieldComment"
                 app:layout_constraintEnd_toEndOf="parent" />

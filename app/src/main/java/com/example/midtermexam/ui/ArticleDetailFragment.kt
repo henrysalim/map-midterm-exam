@@ -23,7 +23,9 @@ import com.example.midtermexam.data.CommentRepository
 
 class ArticleDetailFragment : Fragment() {
 
+    // definisikan commentAdapter
     private lateinit var commentAdapter: CommentAdapter
+    // currentArticle berisikan data artikel yang akan dibuka user pada halaman ini
     private lateinit var currentArticle: Article
 
     override fun onCreateView(
@@ -33,6 +35,14 @@ class ArticleDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_article_detail, container, false)
     }
 
+    /*
+        Saat view dibuat, ambil data article yang akan ditampilkan dari variabel "article_data"
+        yang dikirim melalui Bundle dari Article Fragment. Jika article kosong, kembali ke
+        halaman awal.
+
+        Pada fungsi ini, juga diinisialisasi variabel-variabel elemen fragment (text,
+        image dengan Glide, juga elemen elemen basic lainnya.
+    */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -97,6 +107,7 @@ class ArticleDetailFragment : Fragment() {
         }
     }
 
+    // tampilkan dialog untuk reply komen
     private fun showReplyDialog(commentToReply: Comment) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Balas Komentar dari ${commentToReply.author}")

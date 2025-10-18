@@ -24,7 +24,7 @@ import com.example.midtermexam.model.ArticleViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ArticleFragment : Fragment() {
-
+    // definisikan elemen-elemen pada fragment yang akan di-assign value nya saat view dibuat dengan lateinit var
     private lateinit var articleAdapter: ArticleAdapter
     private val viewModel: ArticleViewModel by viewModels()
 
@@ -38,10 +38,12 @@ class ArticleFragment : Fragment() {
     private lateinit var fabScrollToTop: FloatingActionButton
     private lateinit var searchView: SearchView
     private lateinit var buttonFilter: ImageButton
+
+    // untuk menampung article yang difetch dari API
     private var originalArticleList: List<Article> = emptyList()
     private var recyclerViewState: Parcelable? = null
-    private var currentSearchQuery = ""
-    private var isSortedAlphabetically = false
+    private var currentSearchQuery = "" // untuk menampung kueri pencarian
+    private var isSortedAlphabetically = false // apakah article disort secara alfabet/tidak?
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,17 +55,20 @@ class ArticleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // jalankan fungsi-fungsi ini saat view dibuat
         initViews(view)
         setupRecyclerView()
         setupClickListeners()
         setupScrollListener()
         observeViewModel()
 
+        // jika artikel kosong, segera fetch dari API
         if (viewModel.articles.value.isNullOrEmpty()) {
             viewModel.fetchArticles(viewModel.currentPage, API_KEY)
         }
     }
 
+    // assign value ke variabel penampung elemen fragment
     private fun initViews(view: View) {
         progressBar = view.findViewById(R.id.progressBar)
         recyclerView = view.findViewById(R.id.recyclerViewArticles)
@@ -80,6 +85,10 @@ class ArticleFragment : Fragment() {
         searchView.onActionViewExpanded()
     }
 
+    /*
+        jika user mengklik sebuah artikel, arahkan ke halaman detail
+        dan ambil data beritanya lalu kirimkan ke halaman detail
+    */
     private fun setupRecyclerView() {
         articleAdapter = ArticleAdapter { article ->
             val bundle = Bundle().apply { putParcelable("article_data", article) }
@@ -88,6 +97,12 @@ class ArticleFragment : Fragment() {
         recyclerView.adapter = articleAdapter
     }
 
+    /*
+        atur on click event pada tombol selanjutnya/sebelumnya (pagination),
+        tombol go to top (agar user bisa kembali ke bagian awal halaman),
+        filter berita sesuai keyword yang dimasukkan user,
+        tombol sort artikel secara alfabet
+    */
     private fun setupClickListeners() {
         buttonNextPage.setOnClickListener { viewModel.fetchArticles(viewModel.currentPage + 1, API_KEY) }
         buttonPrevPage.setOnClickListener {
@@ -110,29 +125,32 @@ class ArticleFragment : Fragment() {
             isSortedAlphabetically = !isSortedAlphabetically
             updateFilterIcon()
             applyFilters()
-            val message = if (isSortedAlphabetically) "Diurutkan berdasarkan abjad (A-Z)" else "Urutan dikembalikan ke semula"
+            val message =
+                if (isSortedAlphabetically) "Diurutkan berdasarkan abjad (A-Z)" else "Urutan dikembalikan ke semula"
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }
     }
 
+    // memastikan bahwa posisi terakhir scroll diload kembali setelah data baru diload dan mencegah bug
     private fun observeViewModel() {
         viewModel.articles.observe(viewLifecycleOwner) { articles ->
             originalArticleList = articles
-            applyFilters()
-            showContent()
+            applyFilters() // apply filter yang sudah user tetapkan sebelumnya
+            showContent() // tampilkan lagi contentnya
             if (recyclerViewState != null) {
                 recyclerView.layoutManager?.onRestoreInstanceState(recyclerViewState)
                 recyclerViewState = null
             }
         }
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            showLoading(isLoading)
+            showLoading(isLoading) //tampilkan progress bar loading jika memang sedang loading
         }
         viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
-            message?.let { showError(it) }
+            message?.let { showError(it) } // tampilkan message error via Toast dengan function showError
         }
     }
 
+    // jika ada pencarian, apply pencarian tsb dan cek apakah artikel sedang disort secara alfabet/tidak
     private fun applyFilters() {
         var processedList = originalArticleList
         if (currentSearchQuery.isNotEmpty()) {
@@ -144,6 +162,7 @@ class ArticleFragment : Fragment() {
         articleAdapter.submitList(processedList)
     }
 
+    // tampilkan go to top button sesuai jarak dy yang ditentukan
     private fun setupScrollListener() {
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -152,22 +171,26 @@ class ArticleFragment : Fragment() {
         })
     }
 
+    // update ikon sort
     private fun updateFilterIcon() {
         val colorRes = if (isSortedAlphabetically) R.color.black else android.R.color.darker_gray
         buttonFilter.setColorFilter(ContextCompat.getColor(requireContext(), colorRes))
     }
 
+    // sebelum fragment article didestroy, simpan posisi terakhir user scroll artikel
     override fun onDestroyView() {
         super.onDestroyView()
         recyclerViewState = recyclerView.layoutManager?.onSaveInstanceState()
     }
 
+    // tampilkan progress bar loading jika sedang meload data, dan disable button pada pagination saat loading
     private fun showLoading(isLoading: Boolean) {
         progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         buttonNextPage.isEnabled = !isLoading
         buttonPrevPage.isEnabled = !isLoading
     }
 
+    // tampilkan angka pagination dan atur visbilitas tombol previous
     private fun showContent() {
         textViewError.visibility = View.GONE
         recyclerView.visibility = View.VISIBLE
@@ -176,6 +199,7 @@ class ArticleFragment : Fragment() {
         buttonPrevPage.visibility = if (viewModel.currentPage > 1) View.VISIBLE else View.INVISIBLE
     }
 
+    // tampilkan error saat loading article dengan Toast jka ada
     private fun showError(message: String) {
         recyclerView.visibility = View.GONE
         layoutPagination.visibility = View.GONE
@@ -188,6 +212,5 @@ class ArticleFragment : Fragment() {
     companion object {
         private const val API_KEY = "0391aa4a8d865486adc2220023fcde74"
     }
-
 }
 
