@@ -14,7 +14,6 @@
             android:right="4dp"
             android:top="4dp"/>
 
-    <!-- Shadow manual (untuk versi lama Android) -->
     <stroke
             android:width="0dp"
             android:color="@android:color/transparent"/>
