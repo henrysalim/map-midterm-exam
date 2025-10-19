@@ -39,3 +39,9 @@ Aplikasi ini menyediakan kumpulan artikel pilihan untuk meningkatkan kesadaran p
 - **Daftar Artikel Menarik**: Artikel disajikan dalam format *card* yang menarik secara visual, lengkap dengan gambar thumbnail, judul, dan estimasi waktu baca.
 - **Akses ke Sumber Asli**: Saat artikel ditekan, aplikasi akan membuka browser untuk menampilkan konten lengkap dari sumbernya.
 
+### 4. Fitur Profile
+Pengguna dapat mengurus akun yang telah dibuat di aplikasi ini melalui halaman Profile ini.
+
+- **Edit Profile** : Pengguna dapat menyunting _credentials_ akun mereka seperti nama, usernama, dll.
+- **Change Password** : Pengguna dapat mengubah kata sandi dari akun yang mereka gunakan.
+- 
