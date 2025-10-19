@@ -1,7 +1,7 @@
 
 ---
 
-# Aplikasi Deteksi Depresi Berbasis Android
+# MindLens, Aplikasi Deteksi Depresi Berbasis Android
 
 Aplikasi ini adalah sebuah prototipe yang dirancang untuk membantu pengguna dalam mendeteksi potensi tingkat depresi melalui analisis gambar wajah. Dibangun dengan teknologi Android modern, aplikasi ini menawarkan antarmuka yang ramah pengguna dan fungsionalitas yang kuat.
 
