@@ -25,10 +25,6 @@ Fitur paling utama dari aplikasi ini adalah kemampuannya untuk menganalisis gamb
   - **Buka Kamera**: Mengambil foto secara langsung menggunakan kamera perangkat untuk analisis *real-time*.
   - **Pilih dari Galeri**: Mengunggah gambar yang sudah ada dari galeri ponsel.
 - **Pratinjau Gambar**: Sebelum diunggah, gambar yang dipilih atau diambil akan ditampilkan dalam pratinjau (`ImageView`) untuk memastikan pengguna memilih gambar yang benar.
-- **Proses Unggah dan Analisis**: Setelah pengguna menekan tombol "Upload", aplikasi akan:
-  - Mengonversi gambar ke format yang sesuai (`MultipartBody.Part`).
-  - Mengirim gambar ke backend untuk diproses oleh model *machine learning*.
-  - Menampilkan hasil prediksi (misalnya, "Tingkat Depresi: Depresi") langsung di bawah area pratinjau.
 - **Manajemen Izin (Permission Handling)**: Aplikasi secara cerdas meminta izin yang diperlukan (`CAMERA` dan `READ_MEDIA_IMAGES`/`READ_EXTERNAL_STORAGE`) sebelum mengakses kamera atau galeri, memastikan aplikasi berjalan lancar dan aman sesuai panduan Android terbaru.
 
 ### 2. Riwayat Pemindaian (Scan History)
@@ -42,24 +38,6 @@ Aplikasi ini menyediakan kumpulan artikel pilihan untuk meningkatkan kesadaran p
 
 - **Daftar Artikel Menarik**: Artikel disajikan dalam format *card* yang menarik secara visual, lengkap dengan gambar thumbnail, judul, dan estimasi waktu baca.
 - **Akses ke Sumber Asli**: Saat artikel ditekan, aplikasi akan membuka browser untuk menampilkan konten lengkap dari sumbernya.
-
----
-
-## 🏛️ Arsitektur Modern
-Aplikasi ini dibangun menggunakan komponen dan pustaka modern yang direkomendasikan oleh Google untuk memastikan kode yang bersih, efisien, dan mudah dikelola.
-
-- **Bahasa & Asynchronous**:
-  - **Kotlin**: Kode ditulis sepenuhnya dalam Kotlin.
-  - **Coroutines**: Dimanfaatkan untuk menangani proses *asynchronous* seperti upload gambar tanpa memblokir UI.
-- **Komponen Arsitektur Android**:
-  - **Activity Result API**: Menggunakan API modern (`registerForActivityResult`) untuk menangani permintaan izin dan hasil dari galeri/kamera, menggantikan metode `onActivityResult` yang sudah usang.
-  - **Fragment & ViewModel**: Menggunakan arsitektur berbasis Fragment dengan **ViewModel** (misalnya `AuthViewModel`) untuk mengelola dan mempertahankan *state* data, bahkan saat konfigurasi perangkat berubah.
-- **UI & Interaksi**:
-  - **View Binding**: Untuk interaksi UI yang aman dari *null pointer exceptions*.
-  - **Coil**: Untuk memuat gambar dari URI secara efisien ke `ImageView`.
-- **Keamanan**:
-  - **FileProvider**: Mengimplementasikan `FileProvider` untuk berbagi URI file dengan aman antara aplikasi, sesuai dengan praktik keamanan terbaik Android.
-
 
 ## Prasyarat & Dependensi
 
