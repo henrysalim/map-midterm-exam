@@ -14,7 +14,7 @@ Aplikasi ini adalah sebuah prototipe yang dirancang untuk membantu pengguna dala
 * **Yehezkiel Natanael**
 
 
-## ✨ Fitur Utama
+## Fitur Utama
 
 Aplikasi ini dirancang dengan beberapa fitur inti yang berpusat pada pemindaian wajah untuk prediksi depresi, didukung oleh fungsionalitas yang modern dan *user-friendly*.
 
