@@ -44,4 +44,4 @@ Pengguna dapat mengurus akun yang telah dibuat di aplikasi ini melalui halaman P
 
 - **Edit Profile** : Pengguna dapat menyunting _credentials_ akun mereka seperti nama, usernama, dll.
 - **Change Password** : Pengguna dapat mengubah kata sandi dari akun yang mereka gunakan.
-- 
+---
