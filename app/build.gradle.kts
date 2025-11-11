@@ -1,4 +1,12 @@
-import java.util.Properties
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+//import java.util.Properties
+
+//val localProperties: Properties = gradleLocalProperties(rootDir, providers)
+//val localProperties = java.util.Properties()
+//val localPropertiesFile = rootProject.file("local.properties")
+//if (localPropertiesFile.exists()) {
+//    localProperties.load(localPropertiesFile.inputStream())
+//}
 
 plugins {
     alias(libs.plugins.android.application)
@@ -12,6 +20,8 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
+        compose = true
     }
 
     defaultConfig {
@@ -22,6 +32,18 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // 2. Access your keys:
+        val supabaseUrl: String =
+            localProperties.getProperty("SUPABASE_URL") ?: error("SUPABASE_URL not found in local.properties")
+        val postgresPassword: String =
+            localProperties.getProperty("POSTGRES_PASSWORD") ?: error("POSTGRES_PASSWORD not found in local.properties")
+        val supabaseAnonKey: String =
+            localProperties.getProperty("SUPABASE_ANON_KEY") ?: error("SUPABASE_ANON_KEY not found in local.properties")
+
+        buildConfigField("String", "SUPABASE_URL", "\"$supabaseUrl\"")
+        buildConfigField("String", "POSTGRES_PASSWORD", "\"$postgresPassword\"")
+        buildConfigField("String", "SUPABASE_ANON_KEY", "\"$supabaseAnonKey\"")
     }
 
     buildTypes {
@@ -40,6 +62,18 @@ android {
 }
 
 dependencies {
+
+    // jetpack compose
+    val composeBom = platform("androidx.compose:compose-bom:2025.10.01")
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
+    // Material Design 3
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.ui:ui")
+    // Android Studio Preview support
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -76,4 +110,22 @@ dependencies {
 
 // Image loading library (Coil is modern and Kotlin-first)
     implementation("io.coil-kt:coil:2.5.0")
+
+//    for supabase connection
+//    serializer
+    implementation("io.github.jan-tennert.supabase:serializer-moshi:VERSION")
+    // Google Sign-In
+//    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("io.github.jan-tennert.supabase:auth-kt:3.2.6")
+
+    // Supabase
+    implementation(platform("io.github.jan-tennert.supabase:bom:VERSION"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt:1.4.7")
+    implementation("io.github.jan-tennert.supabase:gotrue-kt:1.4.7")
+    implementation("io.github.jan-tennert.supabase:realtime-kt:1.4.7")
+
+    // Ktor for HTTP requests
+    implementation("io.ktor:ktor-client-android:2.3.7")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.7")
+    implementation("io.ktor:ktor-client-[engine]:3.0.0-rc-1")
 }
