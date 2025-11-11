@@ -46,14 +46,14 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
 
-            buildConfigField("String", "SUPABASE_URL", "\"$supabaseUrl\"")
-            buildConfigField("String", "POSTGRES_PASSWORD", "\"$postgresPassword\"")
-            buildConfigField("String", "SUPABASE_ANON_KEY", "\"$supabaseAnonKey\"")
+            buildConfigField("String", "SUPABASE_URL", "$supabaseUrl")
+            buildConfigField("String", "POSTGRES_PASSWORD", "$postgresPassword")
+            buildConfigField("String", "SUPABASE_ANON_KEY", "$supabaseAnonKey")
         }
         debug {
-            buildConfigField("String", "SUPABASE_URL", "\"$supabaseUrl\"")
-            buildConfigField("String", "POSTGRES_PASSWORD", "\"$postgresPassword\"")
-            buildConfigField("String", "SUPABASE_ANON_KEY", "\"$supabaseAnonKey\"")
+            buildConfigField("String", "SUPABASE_URL", "$supabaseUrl")
+            buildConfigField("String", "POSTGRES_PASSWORD", "$postgresPassword")
+            buildConfigField("String", "SUPABASE_ANON_KEY", "$supabaseAnonKey")
 
         }
     }
@@ -106,13 +106,13 @@ dependencies {
 
 //    for supabase connection
 //    serializer
-    implementation("io.github.jan-tennert.supabase:serializer-moshi:VERSION")
+    implementation("io.github.jan-tennert.supabase:serializer-moshi:3.2.6")
     // Google Sign-In
 //    implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation("io.github.jan-tennert.supabase:auth-kt:3.2.6")
 
     // Supabase
-    implementation(platform("io.github.jan-tennert.supabase:bom:VERSION"))
+    implementation(platform("io.github.jan-tennert.supabase:bom:3.2.6"))
     implementation("io.github.jan-tennert.supabase:postgrest-kt:1.4.7")
     implementation("io.github.jan-tennert.supabase:gotrue-kt:1.4.7")
     implementation("io.github.jan-tennert.supabase:realtime-kt:1.4.7")
@@ -120,5 +120,5 @@ dependencies {
     // Ktor for HTTP requests
     implementation("io.ktor:ktor-client-android:2.3.7")
     implementation("io.ktor:ktor-client-content-negotiation:2.3.7")
-    implementation("io.ktor:ktor-client-[engine]:3.0.0-rc-1")
+//    implementation("io.ktor:ktor-client-[engine]:3.0.0-rc-1")
 }
