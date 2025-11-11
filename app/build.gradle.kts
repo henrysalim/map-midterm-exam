@@ -1,12 +1,5 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-//import java.util.Properties
-
-//val localProperties: Properties = gradleLocalProperties(rootDir, providers)
-//val localProperties = java.util.Properties()
-//val localPropertiesFile = rootProject.file("local.properties")
-//if (localPropertiesFile.exists()) {
-//    localProperties.load(localPropertiesFile.inputStream())
-//}
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -17,11 +10,25 @@ plugins {
 android {
     namespace = "com.example.midtermexam"
     compileSdk = 36
+    val localProperties = Properties()
+    val localPropertiesFile = File(rootDir, "local.properties")
+    if (localPropertiesFile.exists() && localPropertiesFile.isFile) {
+        localPropertiesFile.inputStream().use {
+            localProperties.load(it)
+        }
+    }
+
+    val supabaseUrl: String =
+        localProperties.getProperty("SUPABASE_URL") ?: error("SUPABASE_URL not found in local.properties")
+    val postgresPassword: String =
+        localProperties.getProperty("POSTGRES_PASSWORD") ?: error("POSTGRES_PASSWORD not found in local.properties")
+    val supabaseAnonKey: String =
+        localProperties.getProperty("SUPABASE_ANON_KEY") ?: error("SUPABASE_ANON_KEY not found in local.properties")
 
     buildFeatures {
         viewBinding = true
         buildConfig = true
-        compose = true
+        resValues = true
     }
 
     defaultConfig {
@@ -32,24 +39,22 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        // 2. Access your keys:
-        val supabaseUrl: String =
-            localProperties.getProperty("SUPABASE_URL") ?: error("SUPABASE_URL not found in local.properties")
-        val postgresPassword: String =
-            localProperties.getProperty("POSTGRES_PASSWORD") ?: error("POSTGRES_PASSWORD not found in local.properties")
-        val supabaseAnonKey: String =
-            localProperties.getProperty("SUPABASE_ANON_KEY") ?: error("SUPABASE_ANON_KEY not found in local.properties")
-
-        buildConfigField("String", "SUPABASE_URL", "\"$supabaseUrl\"")
-        buildConfigField("String", "POSTGRES_PASSWORD", "\"$postgresPassword\"")
-        buildConfigField("String", "SUPABASE_ANON_KEY", "\"$supabaseAnonKey\"")
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+
+            buildConfigField("String", "SUPABASE_URL", "\"$supabaseUrl\"")
+            buildConfigField("String", "POSTGRES_PASSWORD", "\"$postgresPassword\"")
+            buildConfigField("String", "SUPABASE_ANON_KEY", "\"$supabaseAnonKey\"")
+        }
+        debug {
+            buildConfigField("String", "SUPABASE_URL", "\"$supabaseUrl\"")
+            buildConfigField("String", "POSTGRES_PASSWORD", "\"$postgresPassword\"")
+            buildConfigField("String", "SUPABASE_ANON_KEY", "\"$supabaseAnonKey\"")
+
         }
     }
     compileOptions {
@@ -62,18 +67,6 @@ android {
 }
 
 dependencies {
-
-    // jetpack compose
-    val composeBom = platform("androidx.compose:compose-bom:2025.10.01")
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
-
-    // Material Design 3
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui")
-    // Android Studio Preview support
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    debugImplementation("androidx.compose.ui:ui-tooling")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
